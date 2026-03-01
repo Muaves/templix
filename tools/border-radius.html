@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Border Radius — Templix Tools</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <meta name="title" content="Templix. ">
+  <meta name="description"
+    content="This is Templix. A simple copy-paste HTML, CSS, JS template library for FREE forever. Please check it out!">
+  <meta name="keywords" content="templates, free, copy-paste">
+  <meta name="robots" content="index, follow">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="language" content="English">
+  <meta name="revisit-after" content="2 days">
+  <meta name="author" content="Muaves">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    :root {
+      --bg: #0a0905;
+      --card: #111009;
+      --border: #1e1b12;
+      --orange: #e8820a;
+      --ol: #f5a832;
+      --text: #e8e2d0;
+      --muted: #6b6452
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      height: 56px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0
+    }
+
+    .logo {
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      font-size: .95rem;
+      color: var(--text)
+    }
+
+    .logo span {
+      color: var(--orange)
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem
+    }
+
+    .nav-right a {
+      font-size: .82rem;
+      color: var(--muted);
+      transition: color .15s
+    }
+
+    .nav-right a:hover {
+      color: var(--text)
+    }
+
+    .tool-badge {
+      background: rgba(232, 130, 10, .12);
+      border: 1px solid rgba(232, 130, 10, .2);
+      color: var(--orange);
+      font-size: .6rem;
+      border-radius: 4px;
+      padding: 2px 7px;
+      font-family: 'Space Mono', monospace
+    }
+
+    .tool-nav {
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      padding: 0 2rem;
+      overflow-x: auto
+    }
+
+    .tool-nav::-webkit-scrollbar {
+      height: 0
+    }
+
+    .tn-link {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .85rem 1.1rem;
+      font-size: .82rem;
+      color: var(--muted);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      white-space: nowrap;
+      transition: color .15s
+    }
+
+    .tn-link:hover {
+      color: var(--text)
+    }
+
+    .tn-link.active {
+      color: var(--orange);
+      border-bottom-color: var(--orange)
+    }
+
+    main {
+      flex: 1;
+      padding: 3rem 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%
+    }
+
+    .tool-label {
+      font-family: 'Space Mono', monospace;
+      font-size: .62rem;
+      letter-spacing: .2em;
+      color: var(--orange);
+      margin-bottom: .6rem
+    }
+
+    .tool-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      color: var(--text);
+      line-height: .9;
+      margin-bottom: .8rem
+    }
+
+    .tool-desc {
+      font-size: .92rem;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 500px;
+      margin-bottom: 3rem
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 2.5rem;
+      align-items: start
+    }
+
+    .preview-box-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 360px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      position: relative;
+      overflow: hidden
+    }
+
+    .preview-bg {
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(-45deg, rgba(255, 255, 255, .02) 0px, rgba(255, 255, 255, .02) 1px, transparent 1px, transparent 8px)
+    }
+
+    .preview-box {
+      width: 200px;
+      height: 200px;
+      background: var(--orange);
+      position: relative;
+      z-index: 1;
+      transition: border-radius .1s
+    }
+
+    .preview-box.with-img {
+      background: none;
+      border: 2px solid var(--orange);
+      overflow: hidden
+    }
+
+    .preview-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover
+    }
+
+    .handles {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 200px;
+      height: 200px;
+      transform: translate(-50%, -50%);
+      z-index: 3;
+      pointer-events: none
+    }
+
+    .corner-dot {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--text);
+      border: 2px solid var(--orange);
+      cursor: pointer;
+      pointer-events: all;
+      transform: translate(-50%, -50%);
+      transition: transform .1s, background .1s
+    }
+
+    .corner-dot:hover {
+      background: var(--orange);
+      transform: translate(-50%, -50%) scale(1.3)
+    }
+
+    .panel {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem
+    }
+
+    .panel-title {
+      font-family: 'Space Mono', monospace;
+      font-size: .62rem;
+      letter-spacing: .16em;
+      color: var(--muted)
+    }
+
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: .65rem 1rem
+    }
+
+    .toggle-label {
+      font-size: .85rem;
+      color: var(--text)
+    }
+
+    .toggle {
+      position: relative;
+      width: 40px;
+      height: 22px;
+      cursor: pointer
+    }
+
+    .toggle input {
+      opacity: 0;
+      width: 0;
+      height: 0
+    }
+
+    .toggle-track {
+      position: absolute;
+      inset: 0;
+      background: var(--border);
+      border-radius: 11px;
+      transition: background .2s
+    }
+
+    .toggle input:checked~.toggle-track {
+      background: var(--orange)
+    }
+
+    .toggle-thumb {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #fff;
+      transition: transform .2s;
+      pointer-events: none
+    }
+
+    .toggle input:checked~.toggle-thumb {
+      transform: translateX(18px)
+    }
+
+    .slider-group {
+      display: flex;
+      flex-direction: column;
+      gap: .5rem
+    }
+
+    .slider-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center
+    }
+
+    .sl-name {
+      font-size: .82rem;
+      color: var(--text)
+    }
+
+    .sl-val {
+      font-family: 'Space Mono', monospace;
+      font-size: .78rem;
+      color: var(--orange);
+      min-width: 45px;
+      text-align: right
+    }
+
+    input[type=range] {
+      width: 100%;
+      height: 4px;
+      border-radius: 2px;
+      background: var(--border);
+      outline: none;
+      appearance: none;
+      -webkit-appearance: none;
+      cursor: pointer
+    }
+
+    input[type=range]::-webkit-slider-thumb {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--orange);
+      cursor: pointer;
+      transition: transform .1s
+    }
+
+    input[type=range]::-webkit-slider-thumb:hover {
+      transform: scale(1.25)
+    }
+
+    .presets {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: .5rem
+    }
+
+    .preset {
+      aspect-ratio: 1;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color .15s;
+      flex-direction: column;
+      gap: .3rem
+    }
+
+    .preset:hover {
+      border-color: rgba(232, 130, 10, .4)
+    }
+
+    .preset.selected {
+      border-color: var(--orange);
+      background: rgba(232, 130, 10, .08)
+    }
+
+    .preset-box {
+      width: 28px;
+      height: 28px;
+      background: rgba(232, 130, 10, .5)
+    }
+
+    .preset-lbl {
+      font-size: .62rem;
+      color: var(--muted);
+      font-family: 'Space Mono', monospace
+    }
+
+    .code-out {
+      background: #0d0d0d;
+      border: 1px solid #1a1a1a;
+      border-radius: 10px;
+      overflow: hidden
+    }
+
+    .co-bar {
+      padding: .5rem .9rem;
+      border-bottom: 1px solid #1a1a1a;
+      display: flex;
+      justify-content: space-between;
+      align-items: center
+    }
+
+    .co-lang {
+      font-family: 'Space Mono', monospace;
+      font-size: .58rem;
+      letter-spacing: .12em;
+      color: #333
+    }
+
+    .co-copy {
+      background: rgba(255, 255, 255, .06);
+      border: 1px solid rgba(255, 255, 255, .08);
+      border-radius: 5px;
+      padding: 3px 9px;
+      font-size: .7rem;
+      color: #555;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      transition: all .15s
+    }
+
+    .co-copy:hover {
+      background: rgba(255, 255, 255, .1);
+      color: var(--text)
+    }
+
+    .co-copy.ok {
+      color: #28c840
+    }
+
+    .co-body {
+      padding: 1rem 1.2rem;
+      font-family: 'Space Mono', monospace;
+      font-size: .76rem;
+      color: #abb2bf;
+      line-height: 1.7
+    }
+
+    .co-body .k {
+      color: #c678dd
+    }
+
+    .co-body .v {
+      color: #98c379
+    }
+
+    .co-body .p {
+      color: #e8820a
+    }
+
+    .unit-switch {
+      display: flex;
+      gap: .3rem;
+      background: #0d0d0d;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      padding: 2px
+    }
+
+    .us {
+      flex: 1;
+      text-align: center;
+      padding: .28rem;
+      border-radius: 5px;
+      font-size: .72rem;
+      cursor: pointer;
+      color: var(--muted);
+      font-family: 'Space Mono', monospace;
+      transition: all .15s
+    }
+
+    .us.active {
+      background: var(--orange);
+      color: #000;
+      font-weight: 700
+    }
+
+    @media(max-width:800px) {
+      .layout {
+        grid-template-columns: 1fr
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <a href="../index.html" class="logo">Templix<span>.</span></a>
+    <div class="nav-right">
+      <span class="tool-badge">TOOLS</span>
+      <a href="../components.html">Components</a>
+      <a href="../docs/index.html">Docs</a>
+    </div>
+  </nav>
+  <div class="tool-nav">
+    <a href="color-grabber.html" class="tn-link">Color Grabber</a>
+    <a href="border-radius.html" class="tn-link active">Border Radius</a>
+    <a href="shadow-gen.html" class="tn-link">Box Shadow</a>
+    <a href="gradient-gen.html" class="tn-link">Gradient</a>
+  </div>
+  <main>
+    <div class="tool-label">TOOLS / BORDER RADIUS</div>
+    <h1 class="tool-title">BORDER RADIUS<br>GENERATOR.</h1>
+    <p class="tool-desc">Dial in perfect rounded corners. Control all four independently or link them together. Copies
+      CSS instantly.</p>
+
+    <div class="layout">
+      <div>
+        <div class="preview-box-wrap">
+          <div class="preview-bg"></div>
+          <div class="preview-box" id="previewBox"></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="toggle-row">
+          <span class="toggle-label">Link all corners</span>
+          <label class="toggle">
+            <input type="checkbox" id="linkToggle" checked>
+            <span class="toggle-track"></span>
+            <span class="toggle-thumb"></span>
+          </label>
+        </div>
+
+        <div>
+          <div class="panel-title" style="margin-bottom:.8rem">UNIT</div>
+          <div class="unit-switch" id="unitSwitch">
+            <div class="us active" data-unit="px">px</div>
+            <div class="us" data-unit="%">%</div>
+            <div class="us" data-unit="rem">rem</div>
+          </div>
+        </div>
+
+        <div class="slider-group">
+          <div class="slider-label"><span class="sl-name">Top Left</span><span class="sl-val" id="v-tl">16px</span>
+          </div>
+          <input type="range" id="s-tl" min="0" max="100" value="16">
+        </div>
+        <div class="slider-group">
+          <div class="slider-label"><span class="sl-name">Top Right</span><span class="sl-val" id="v-tr">16px</span>
+          </div>
+          <input type="range" id="s-tr" min="0" max="100" value="16">
+        </div>
+        <div class="slider-group">
+          <div class="slider-label"><span class="sl-name">Bottom Right</span><span class="sl-val" id="v-br">16px</span>
+          </div>
+          <input type="range" id="s-br" min="0" max="100" value="16">
+        </div>
+        <div class="slider-group">
+          <div class="slider-label"><span class="sl-name">Bottom Left</span><span class="sl-val" id="v-bl">16px</span>
+          </div>
+          <input type="range" id="s-bl" min="0" max="100" value="16">
+        </div>
+
+        <div>
+          <div class="panel-title" style="margin-bottom:.8rem">PRESETS</div>
+          <div class="presets" id="presets">
+            <div class="preset selected" data-val="0">
+              <div class="preset-box" style="border-radius:0"></div>
+              <div class="preset-lbl">sharp</div>
+            </div>
+            <div class="preset" data-val="4">
+              <div class="preset-box" style="border-radius:4px"></div>
+              <div class="preset-lbl">4px</div>
+            </div>
+            <div class="preset" data-val="8">
+              <div class="preset-box" style="border-radius:8px"></div>
+              <div class="preset-lbl">8px</div>
+            </div>
+            <div class="preset" data-val="16">
+              <div class="preset-box" style="border-radius:16px"></div>
+              <div class="preset-lbl">16px</div>
+            </div>
+            <div class="preset" data-val="24">
+              <div class="preset-box" style="border-radius:24px"></div>
+              <div class="preset-lbl">24px</div>
+            </div>
+            <div class="preset" data-val="50">
+              <div class="preset-box" style="border-radius:50%"></div>
+              <div class="preset-lbl">pill</div>
+            </div>
+            <div class="preset" data-val="blob1">
+              <div class="preset-box" style="border-radius:60% 40% 30% 70% / 60% 30% 70% 40%"></div>
+              <div class="preset-lbl">blob</div>
+            </div>
+            <div class="preset" data-val="blob2">
+              <div class="preset-box" style="border-radius:30% 70% 70% 30% / 30% 30% 70% 70%"></div>
+              <div class="preset-lbl">blob 2</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="code-out">
+          <div class="co-bar"><span class="co-lang">CSS</span><button class="co-copy" id="copyCSS">Copy</button></div>
+          <div class="co-body" id="codeOutput">
+            <span class="k">border-radius</span>: <span class="v" id="codeVal">16px</span>;
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script>
+    var state = { tl: 16, tr: 16, br: 16, bl: 16, linked: true, unit: 'px' };
+
+    function unitMax() { return state.unit === '%' ? 50 : state.unit === 'rem' ? 6 : 100; }
+    function fmtVal(v) {
+      if (state.unit === 'rem') return Math.round(v / 16 * 100) / 100 + 'rem';
+      if (state.unit === '%') return v + '%';
+      return v + 'px';
+    }
+
+    function updatePreview() {
+      var box = document.getElementById('previewBox');
+      var tl = fmtVal(state.tl), tr = fmtVal(state.tr), br = fmtVal(state.br), bl = fmtVal(state.bl);
+      var r;
+      if (state.tl === state.tr && state.tr === state.br && state.br === state.bl) r = tl;
+      else r = tl + ' ' + tr + ' ' + br + ' ' + bl;
+      box.style.borderRadius = r;
+      document.getElementById('codeVal').textContent = r;
+    }
+
+    function updateSliderLabels() {
+      ['tl', 'tr', 'br', 'bl'].forEach(function (k) {
+        document.getElementById('v-' + k).textContent = fmtVal(state[k]);
+      });
+    }
+
+    ['tl', 'tr', 'br', 'bl'].forEach(function (k) {
+      var sl = document.getElementById('s-' + k);
+      sl.addEventListener('input', function () {
+        var v = parseInt(sl.value);
+        if (state.linked) { state.tl = state.tr = state.br = state.bl = v;['tl', 'tr', 'br', 'bl'].forEach(function (j) { document.getElementById('s-' + j).value = v; }); }
+        else state[k] = v;
+        updateSliderLabels();
+        updatePreview();
+      });
+    });
+
+    document.getElementById('linkToggle').addEventListener('change', function () { state.linked = this.checked; });
+
+    document.getElementById('unitSwitch').addEventListener('click', function (e) {
+      var t = e.target.closest('[data-unit]'); if (!t) return;
+      state.unit = t.dataset.unit;
+      var max = unitMax();
+      document.querySelectorAll('#unitSwitch .us').forEach(function (u) { u.classList.toggle('active', u === t); });
+      ['tl', 'tr', 'br', 'bl'].forEach(function (k) {
+        var sl = document.getElementById('s-' + k);
+        sl.max = max;
+        if (state[k] > max) state[k] = max;
+        sl.value = state[k];
+      });
+      updateSliderLabels();
+      updatePreview();
+    });
+
+    document.getElementById('presets').addEventListener('click', function (e) {
+      var p = e.target.closest('[data-val]'); if (!p) return;
+      document.querySelectorAll('.preset').forEach(function (x) { x.classList.remove('selected'); });
+      p.classList.add('selected');
+      var v = p.dataset.val;
+      var box = document.getElementById('previewBox');
+      if (v === 'blob1') { box.style.borderRadius = '60% 40% 30% 70% / 60% 30% 70% 40%'; document.getElementById('codeVal').textContent = '60% 40% 30% 70% / 60% 30% 70% 40%'; return; }
+      if (v === 'blob2') { box.style.borderRadius = '30% 70% 70% 30% / 30% 30% 70% 70%'; document.getElementById('codeVal').textContent = '30% 70% 70% 30% / 30% 30% 70% 70%'; return; }
+      var n = parseInt(v);
+      if (v === '50') { state.tl = state.tr = state.br = state.bl = 50; state.unit = '%'; }
+      else { state.tl = state.tr = state.br = state.bl = n; }
+      ['tl', 'tr', 'br', 'bl'].forEach(function (k) { document.getElementById('s-' + k).value = state[k]; });
+      updateSliderLabels();
+      updatePreview();
+    });
+
+    document.getElementById('copyCSS').addEventListener('click', function () {
+      var v = document.getElementById('codeVal').textContent;
+      navigator.clipboard.writeText('border-radius: ' + v + ';');
+      var btn = document.getElementById('copyCSS');
+      btn.textContent = 'Copied!'; btn.classList.add('ok');
+      setTimeout(function () { btn.textContent = 'Copy'; btn.classList.remove('ok'); }, 1400);
+    });
+
+    updatePreview();
+  </script>
+</body>
+
+</html>

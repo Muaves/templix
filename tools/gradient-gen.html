@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Gradient Generator — Templix Tools</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="title" content="Templix. ">
+  <meta name="description"
+    content="This is Templix. A simple copy-paste HTML, CSS, JS template library for FREE forever. Please check it out!">
+  <meta name="keywords" content="templates, free, copy-paste">
+  <meta name="robots" content="index, follow">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="language" content="English">
+  <meta name="revisit-after" content="2 days">
+  <meta name="author" content="Muaves">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0905;--card:#111009;--border:#1e1b12;--orange:#e8820a;--ol:#f5a832;--text:#e8e2d0;--muted:#6b6452}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;display:flex;flex-direction:column}
+a{text-decoration:none;color:inherit}
+nav{display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:56px;border-bottom:1px solid var(--border)}
+.logo{font-family:'Space Mono',monospace;font-weight:700;font-size:.95rem}
+.logo span{color:var(--orange)}
+.nav-right{display:flex;align-items:center;gap:1.2rem}
+.nav-right a{font-size:.82rem;color:var(--muted);transition:color .15s}
+.nav-right a:hover{color:var(--text)}
+.tool-badge{background:rgba(232,130,10,.12);border:1px solid rgba(232,130,10,.2);color:var(--orange);font-size:.6rem;border-radius:4px;padding:2px 7px;font-family:'Space Mono',monospace}
+.tool-nav{border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 2rem;overflow-x:auto}
+.tool-nav::-webkit-scrollbar{height:0}
+.tn-link{display:flex;align-items:center;gap:.5rem;padding:.85rem 1.1rem;font-size:.82rem;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:color .15s}
+.tn-link:hover{color:var(--text)}
+.tn-link.active{color:var(--orange);border-bottom-color:var(--orange)}
+main{flex:1;padding:3rem 2rem;max-width:1100px;margin:0 auto;width:100%}
+.tool-label{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.2em;color:var(--orange);margin-bottom:.6rem}
+.tool-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,5vw,4rem);color:var(--text);line-height:.9;margin-bottom:.8rem}
+.tool-desc{font-size:.92rem;color:var(--muted);line-height:1.7;max-width:500px;margin-bottom:3rem}
+
+.layout{display:grid;grid-template-columns:1fr 400px;gap:2.5rem;align-items:start}
+
+.preview-grad{width:100%;height:340px;border-radius:16px;border:1px solid var(--border);transition:all .15s;position:relative;overflow:hidden;cursor:pointer}
+.preview-grad-label{position:absolute;bottom:1rem;left:0;right:0;text-align:center;font-family:'Space Mono',monospace;font-size:.65rem;color:rgba(255,255,255,.4)}
+
+.panel{display:flex;flex-direction:column;gap:1.2rem}
+.panel-title{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.16em;color:var(--muted)}
+
+.type-tabs{display:flex;gap:.3rem;background:#0d0d0d;border:1px solid var(--border);border-radius:8px;padding:3px}
+.tt{flex:1;text-align:center;padding:.35rem;border-radius:5px;font-size:.72rem;cursor:pointer;color:var(--muted);font-family:'Space Mono',monospace;transition:all .15s}
+.tt.active{background:var(--orange);color:#000;font-weight:700}
+
+.stops-list{display:flex;flex-direction:column;gap:.4rem}
+.stop-row{display:flex;align-items:center;gap:.5rem;background:#0d0d0d;border:1px solid #1a1a1a;border-radius:8px;padding:.5rem .7rem}
+.stop-color{width:28px;height:28px;border-radius:6px;border:1px solid #333;cursor:pointer;flex-shrink:0}
+.stop-pos-wrap{flex:1;display:flex;align-items:center;gap:.4rem}
+.stop-pos-label{font-family:'Space Mono',monospace;font-size:.68rem;color:var(--muted);min-width:32px;text-align:right}
+input[type=range].stop-pos{height:4px;border-radius:2px;background:var(--border);outline:none;appearance:none;-webkit-appearance:none;cursor:pointer;flex:1}
+input[type=range].stop-pos::-webkit-slider-thumb{appearance:none;-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:var(--orange);cursor:pointer}
+input[type=color].stop-color-input{opacity:0;position:absolute;pointer-events:none}
+.stop-del{background:none;border:none;color:#333;cursor:pointer;display:flex;align-items:center;transition:color .15s}
+.stop-del:hover{color:#e06c75}
+
+.add-stop-btn{display:flex;align-items:center;gap:.4rem;background:transparent;border:1px dashed var(--border);border-radius:7px;padding:.45rem .7rem;font-size:.78rem;color:var(--muted);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s;width:100%}
+.add-stop-btn:hover{border-color:rgba(232,130,10,.4);color:var(--text)}
+
+.slider-group{display:flex;flex-direction:column;gap:.5rem}
+.slider-label{display:flex;justify-content:space-between}
+.sl-name{font-size:.82rem;color:var(--text)}
+.sl-val{font-family:'Space Mono',monospace;font-size:.78rem;color:var(--orange)}
+input[type=range]:not(.stop-pos){width:100%;height:4px;border-radius:2px;background:var(--border);outline:none;appearance:none;-webkit-appearance:none;cursor:pointer}
+input[type=range]:not(.stop-pos)::-webkit-slider-thumb{appearance:none;-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--orange);cursor:pointer}
+
+.presets-wrap{display:grid;grid-template-columns:repeat(5,1fr);gap:.4rem}
+.grad-preset{height:36px;border-radius:7px;cursor:pointer;border:2px solid transparent;transition:border-color .15s,transform .15s}
+.grad-preset:hover{border-color:var(--orange);transform:scale(1.05)}
+
+.code-out{background:#0d0d0d;border:1px solid #1a1a1a;border-radius:10px;overflow:hidden}
+.co-bar{padding:.5rem .9rem;border-bottom:1px solid #1a1a1a;display:flex;justify-content:space-between;align-items:center}
+.co-lang{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.12em;color:#333}
+.co-copy{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:5px;padding:3px 9px;font-size:.7rem;color:#555;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s}
+.co-copy:hover{background:rgba(255,255,255,.1);color:var(--text)}
+.co-copy.ok{color:#28c840}
+.co-body{padding:1rem 1.2rem;font-family:'Space Mono',monospace;font-size:.74rem;color:#abb2bf;line-height:1.7;word-break:break-all}
+.co-body .k{color:#c678dd}
+@media(max-width:800px){.layout{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="logo">Templix<span>.</span></a>
+  <div class="nav-right">
+    <span class="tool-badge">TOOLS</span>
+    <a href="../components.html">Components</a>
+    <a href="../docs/index.html">Docs</a>
+  </div>
+</nav>
+<div class="tool-nav">
+  <a href="color-grabber.html" class="tn-link">Color Grabber</a>
+  <a href="border-radius.html" class="tn-link">Border Radius</a>
+  <a href="shadow-gen.html" class="tn-link">Box Shadow</a>
+  <a href="gradient-gen.html" class="tn-link active">Gradient</a>
+</div>
+<main>
+  <div class="tool-label">TOOLS / GRADIENT</div>
+  <h1 class="tool-title">GRADIENT<br>GENERATOR.</h1>
+  <p class="tool-desc">Build linear, radial, and conic gradients with multiple color stops. Angle control, live preview, one-click CSS copy.</p>
+  <div class="layout">
+    <div>
+      <div class="preview-grad" id="previewGrad">
+        <div class="preview-grad-label">click to copy</div>
+      </div>
+    </div>
+    <div class="panel">
+      <div>
+        <div class="panel-title" style="margin-bottom:.6rem">TYPE</div>
+        <div class="type-tabs" id="typeTabs">
+          <div class="tt active" data-type="linear">Linear</div>
+          <div class="tt" data-type="radial">Radial</div>
+          <div class="tt" data-type="conic">Conic</div>
+        </div>
+      </div>
+      <div id="angleWrap">
+        <div class="slider-group">
+          <div class="slider-label"><span class="sl-name">Angle</span><span class="sl-val" id="v-angle">135deg</span></div>
+          <input type="range" id="s-angle" min="0" max="360" value="135">
+        </div>
+      </div>
+      <div>
+        <div class="panel-title" style="margin-bottom:.6rem">COLOR STOPS</div>
+        <div class="stops-list" id="stopsList"></div>
+        <button class="add-stop-btn" id="addStopBtn" style="margin-top:.4rem">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add color stop
+        </button>
+      </div>
+      <div>
+        <div class="panel-title" style="margin-bottom:.6rem">PRESETS</div>
+        <div class="presets-wrap" id="presetsWrap"></div>
+      </div>
+      <div class="code-out">
+        <div class="co-bar"><span class="co-lang">CSS</span><button class="co-copy" id="copyGrad">Copy</button></div>
+        <div class="co-body"><span class="k">background</span>: <span id="codeOut"></span>;</div>
+      </div>
+    </div>
+  </div>
+</main>
+<script>
+var state={type:'linear',angle:135,stops:[{color:'#e8820a',pos:0},{color:'#61afef',pos:100}]};
+
+var PRESETS=[
+  ['#0a0905','#1e1b12','#e8820a'],['#667eea','#764ba2'],['#f093fb','#f5576c'],
+  ['#4facfe','#00f2fe'],['#43e97b','#38f9d7'],['#fa709a','#fee140'],
+  ['#a18cd1','#fbc2eb'],['#fccb90','#d57eeb'],['#e8820a','#0a0905'],
+  ['#0d1525','#1a3a6a'],
+];
+
+function buildCSS(){
+  var stops=state.stops.map(function(s){return s.color+' '+s.pos+'%';}).join(', ');
+  if(state.type==='linear') return 'linear-gradient('+state.angle+'deg, '+stops+')';
+  if(state.type==='radial') return 'radial-gradient(circle, '+stops+')';
+  return 'conic-gradient(from '+state.angle+'deg, '+stops+')';
+}
+function render(){
+  var css=buildCSS();
+  document.getElementById('previewGrad').style.background=css;
+  document.getElementById('codeOut').textContent=css;
+  renderStops();
+}
+function renderStops(){
+  var list=document.getElementById('stopsList');
+  list.innerHTML=state.stops.map(function(s,i){
+    return '<div class="stop-row"><div class="stop-color" style="background:'+s.color+'" onclick="openColorPicker('+i+',this)"></div>'
+    +'<div class="stop-pos-wrap"><input class="stop-pos" type="range" min="0" max="100" value="'+s.pos+'" oninput="setStopPos('+i+',this.value)"><span class="stop-pos-label">'+s.pos+'%</span></div>'
+    +(state.stops.length>2?'<button class="stop-del" onclick="delStop('+i+')"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>':'')
+    +'<input type="color" class="stop-color-input" id="cp-'+i+'" value="'+s.color+'" oninput="setStopColor('+i+',this.value)">'
+    +'</div>';
+  }).join('');
+}
+function openColorPicker(i,el){var cp=document.getElementById('cp-'+i);cp.style.left=el.getBoundingClientRect().left+'px';cp.click();}
+function setStopPos(i,v){state.stops[i].pos=parseInt(v);render();}
+function setStopColor(i,v){state.stops[i].color=v;render();}
+function delStop(i){state.stops.splice(i,1);render();}
+
+document.getElementById('typeTabs').addEventListener('click',function(e){
+  var t=e.target.closest('[data-type]');if(!t)return;
+  state.type=t.dataset.type;
+  document.querySelectorAll('.tt').forEach(function(tt){tt.classList.toggle('active',tt===t);});
+  document.getElementById('angleWrap').style.display=state.type==='radial'?'none':'block';
+  render();
+});
+document.getElementById('s-angle').addEventListener('input',function(){
+  state.angle=parseInt(this.value);
+  document.getElementById('v-angle').textContent=this.value+'deg';
+  render();
+});
+document.getElementById('addStopBtn').addEventListener('click',function(){
+  var positions=state.stops.map(function(s){return s.pos;});
+  var max=Math.max.apply(null,positions),min=Math.min.apply(null,positions);
+  var newPos=Math.round((max+min)/2);
+  state.stops.push({color:'#ffffff',pos:newPos});
+  state.stops.sort(function(a,b){return a.pos-b.pos;});
+  render();
+});
+
+var presetsWrap=document.getElementById('presetsWrap');
+PRESETS.forEach(function(stops){
+  var div=document.createElement('div');
+  div.className='grad-preset';
+  div.style.background='linear-gradient(135deg, '+stops.join(', ')+')';
+  div.addEventListener('click',function(){
+    state.stops=stops.map(function(c,i){return {color:c,pos:Math.round(i/(stops.length-1)*100)};});
+    state.type='linear';
+    document.querySelectorAll('.tt').forEach(function(tt){tt.classList.toggle('active',tt.dataset.type==='linear');});
+    render();
+  });
+  presetsWrap.appendChild(div);
+});
+
+document.getElementById('previewGrad').addEventListener('click',function(){
+  navigator.clipboard.writeText('background: '+buildCSS()+';');
+  var lbl=document.querySelector('.preview-grad-label');
+  lbl.textContent='copied!';
+  setTimeout(function(){lbl.textContent='click to copy';},1400);
+});
+document.getElementById('copyGrad').addEventListener('click',function(){
+  navigator.clipboard.writeText('background: '+buildCSS()+';');
+  var btn=document.getElementById('copyGrad');
+  btn.textContent='Copied!';btn.classList.add('ok');
+  setTimeout(function(){btn.textContent='Copy';btn.classList.remove('ok');},1400);
+});
+
+render();
+</script>
+</body>
+</html>

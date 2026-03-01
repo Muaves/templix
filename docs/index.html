@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Templix Docs</title>
+  <meta name="title" content="Templix. ">
+  <meta name="description"
+    content="This is Templix. A simple copy-paste HTML, CSS, JS template library for FREE forever. Please check it out!">
+  <meta name="keywords" content="templates, free, copy-paste">
+  <meta name="robots" content="index, follow">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="language" content="English">
+  <meta name="revisit-after" content="2 days">
+  <meta name="author" content="Muaves">
+  <link rel="icon" type="image/png" href="../favicon.ico">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="../favicon.ico">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    :root {
+      --bg: #0a0905;
+      --card: #111009;
+      --border: #1e1b12;
+      --orange: #e8820a;
+      --ol: #f5a832;
+      --text: #e8e2d0;
+      --muted: #6b6452;
+      --sidebar-w: 260px
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      display: flex;
+      min-height: 100vh
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none
+    }
+
+    .sidebar {
+      width: var(--sidebar-w);
+      flex-shrink: 0;
+      border-right: 1px solid var(--border);
+      padding: 1.5rem 1rem;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem
+    }
+
+    .sidebar::-webkit-scrollbar {
+      width: 3px
+    }
+
+    .sidebar::-webkit-scrollbar-thumb {
+      background: var(--border)
+    }
+
+    .s-logo {
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      font-size: .95rem;
+      color: var(--text);
+      letter-spacing: .06em;
+      display: flex;
+      align-items: center;
+      gap: .4rem
+    }
+
+    .s-logo span {
+      color: var(--orange)
+    }
+
+    .s-badge {
+      background: rgba(232, 130, 10, .12);
+      border: 1px solid rgba(232, 130, 10, .22);
+      color: var(--orange);
+      font-size: .6rem;
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-family: 'Space Mono', monospace
+    }
+
+    .s-section {
+      display: flex;
+      flex-direction: column;
+      gap: .1rem
+    }
+
+    .s-title {
+      font-family: 'Space Mono', monospace;
+      font-size: .58rem;
+      letter-spacing: .2em;
+      color: var(--muted);
+      padding: .4rem .6rem;
+      margin-bottom: .2rem
+    }
+
+    .s-link {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      padding: .5rem .7rem;
+      border-radius: 7px;
+      font-size: .83rem;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all .15s;
+      border: 1px solid transparent
+    }
+
+    .s-link:hover {
+      color: var(--text);
+      background: rgba(255, 255, 255, .04)
+    }
+
+    .s-link.active {
+      color: var(--orange);
+      background: rgba(232, 130, 10, .08);
+      border-color: rgba(232, 130, 10, .18)
+    }
+
+    .s-link svg {
+      flex-shrink: 0;
+      opacity: .55
+    }
+
+    .s-link.active svg {
+      opacity: 1
+    }
+
+    .main {
+      flex: 1;
+      min-width: 0
+    }
+
+    .topbar {
+      height: 54px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      padding: 0 3rem;
+      gap: 1.5rem;
+      position: sticky;
+      top: 0;
+      background: rgba(10, 9, 5, .96);
+      backdrop-filter: blur(12px);
+      z-index: 50
+    }
+
+    .tb-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.3rem;
+      letter-spacing: .04em
+    }
+
+    .tb-links {
+      display: flex;
+      gap: 1.5rem;
+      margin-left: auto
+    }
+
+    .tb-links a {
+      font-size: .82rem;
+      color: var(--muted);
+      transition: color .15s
+    }
+
+    .tb-links a:hover {
+      color: var(--text)
+    }
+
+    .tb-cta {
+      background: var(--orange);
+      color: #000;
+      border-radius: 7px;
+      padding: 5px 14px;
+      font-size: .8rem;
+      font-weight: 600;
+      transition: background .15s
+    }
+
+    .tb-cta:hover {
+      background: var(--ol)
+    }
+
+    .content {
+      max-width: 860px;
+      padding: 4rem 3rem 6rem;
+      margin: 0 auto
+    }
+
+    .doc-section {
+      margin-bottom: 5rem;
+      scroll-margin-top: 4rem
+    }
+
+    .doc-label {
+      font-family: 'Space Mono', monospace;
+      font-size: .62rem;
+      letter-spacing: .2em;
+      color: var(--orange);
+      margin-bottom: .8rem
+    }
+
+    .doc-h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      line-height: .9;
+      color: var(--text);
+      margin-bottom: 1.5rem
+    }
+
+    .doc-h1 em {
+      color: var(--orange);
+      font-style: normal
+    }
+
+    .doc-h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      color: var(--text);
+      margin-bottom: 1.2rem;
+      margin-top: 2.5rem
+    }
+
+    .doc-p {
+      font-size: .95rem;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 1rem
+    }
+
+    .doc-p strong {
+      color: var(--text);
+      font-weight: 500
+    }
+
+    .doc-p a {
+      color: var(--orange);
+      border-bottom: 1px solid rgba(232, 130, 10, .3);
+      transition: border-color .15s
+    }
+
+    .doc-p a:hover {
+      border-color: var(--orange)
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 3rem 0
+    }
+
+    .callout {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--orange);
+      border-radius: 0 10px 10px 0;
+      padding: 1rem 1.4rem;
+      margin: 1.5rem 0;
+      font-size: .88rem;
+      color: var(--muted);
+      line-height: 1.7
+    }
+
+    .callout strong {
+      color: var(--text)
+    }
+
+    .callout.tip {
+      border-left-color: #28c840
+    }
+
+    .callout.warn {
+      border-left-color: #f5a832
+    }
+
+    .code-block {
+      background: #0d0d0d;
+      border: 1px solid #1a1a1a;
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 1.5rem 0
+    }
+
+    .cb-bar {
+      padding: .6rem 1rem;
+      border-bottom: 1px solid #1a1a1a;
+      display: flex;
+      align-items: center;
+      justify-content: space-between
+    }
+
+    .cb-lang {
+      font-family: 'Space Mono', monospace;
+      font-size: .6rem;
+      letter-spacing: .14em;
+      color: #3a3a3a
+    }
+
+    .cb-copy {
+      background: rgba(255, 255, 255, .06);
+      border: 1px solid rgba(255, 255, 255, .08);
+      border-radius: 5px;
+      padding: 3px 10px;
+      font-size: .7rem;
+      color: #555;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      transition: all .15s
+    }
+
+    .cb-copy:hover {
+      background: rgba(255, 255, 255, .1);
+      color: var(--text)
+    }
+
+    .cb-copy.ok {
+      color: #28c840;
+      border-color: rgba(40, 200, 64, .3)
+    }
+
+    .cb-body {
+      padding: 1.2rem 1.4rem;
+      overflow-x: auto
+    }
+
+    .cb-body code {
+      font-family: 'Space Mono', monospace;
+      font-size: .76rem;
+      line-height: 1.75;
+      color: #abb2bf;
+      white-space: pre
+    }
+
+    .cb-body .k {
+      color: #c678dd
+    }
+
+    .cb-body .s {
+      color: #98c379
+    }
+
+    .cb-body .c {
+      color: #4b5263;
+      font-style: italic
+    }
+
+    .cb-body .o {
+      color: #e8820a
+    }
+
+    .cb-body .t {
+      color: #61afef
+    }
+
+    .cb-body .n {
+      color: #d19a66
+    }
+
+    .steps-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin: 2rem 0
+    }
+
+    .step-row {
+      display: flex;
+      gap: 1.2rem;
+      align-items: flex-start
+    }
+
+    .step-num {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(232, 130, 10, .12);
+      border: 1px solid rgba(232, 130, 10, .25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Space Mono', monospace;
+      font-size: .75rem;
+      color: var(--orange);
+      flex-shrink: 0;
+      margin-top: .15rem
+    }
+
+    .step-body .step-title {
+      font-size: .92rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: .3rem
+    }
+
+    .step-body .step-desc {
+      font-size: .85rem;
+      color: var(--muted);
+      line-height: 1.65
+    }
+
+    .file-tree {
+      background: #0d0d0d;
+      border: 1px solid #1a1a1a;
+      border-radius: 12px;
+      padding: 1.4rem 1.6rem;
+      font-family: 'Space Mono', monospace;
+      font-size: .74rem;
+      line-height: 2;
+      color: #555;
+      margin: 1.5rem 0
+    }
+
+    .ft-dir {
+      color: #61afef
+    }
+
+    .ft-file {
+      color: #abb2bf
+    }
+
+    .ft-comment {
+      color: #3a3a3a;
+      font-style: italic
+    }
+
+    .tag-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin: 1rem 0
+    }
+
+    .tag {
+      background: #1a1710;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: .25rem .6rem;
+      font-size: .72rem;
+      color: var(--muted);
+      font-family: 'Space Mono', monospace
+    }
+
+    .tag.orange {
+      background: rgba(232, 130, 10, .1);
+      border-color: rgba(232, 130, 10, .2);
+      color: var(--orange)
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+      margin: 1.5rem 0
+    }
+
+    .info-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.4rem
+    }
+
+    .info-card h4 {
+      font-size: .9rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: .5rem;
+      display: flex;
+      align-items: center;
+      gap: .5rem
+    }
+
+    .info-card p {
+      font-size: .83rem;
+      color: var(--muted);
+      line-height: 1.65
+    }
+
+    @media(max-width:800px) {
+      .sidebar {
+        display: none
+      }
+
+      .content {
+        padding: 2rem 1.5rem
+      }
+
+      .two-col {
+        grid-template-columns: 1fr
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <aside class="sidebar">
+    <div>
+      <div class="s-logo"><a href="../index.html">Templix<span>.</span></a><span class="s-badge">DOCS</span></div>
+    </div>
+    <div class="s-section">
+      <div class="s-title">GETTING STARTED</div>
+      <a class="s-link active" href="#intro" onclick="setActive(this)">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+        </svg>
+        Introduction
+      </a>
+      <a class="s-link" href="#quickstart" onclick="setActive(this)">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+        </svg>
+        Quick Start
+      </a>
+      <a class="s-link" href="#structure" onclick="setActive(this)">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z" />
+        </svg>
+        File Structure
+      </a>
+    </div>
+    <div class="s-section">
+      <div class="s-title">USAGE</div>
+      <a class="s-link" href="#copy-paste" onclick="setActive(this)">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="9" y="9" width="13" height="13" rx="2" />
+          <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
+        </svg>
+        Copy & Paste
+      </a>
+      <a class="s-link" href="#customise" onclick="setActive(this)">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3" />
+          <path
+            d="M19.07 4.93l-1.41 1.41M4.93 4.93l1.41 1.41M12 2v2M12 20v2M20 12h2M2 12h2M19.07 19.07l-1.41-1.41M4.93 19.07l1.41-1.41" />
+        </svg>
+        Customising
+      </a>
+      <a class="s-link" href="#variables" onclick="setActive(this)">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="16 18 22 12 16 6" />
+          <polyline points="8 6 2 12 8 18" />
+        </svg>
+        CSS Variables
+      </a>
+    </div>
+    <div class="s-section">
+      <div class="s-title">CONTRIBUTING</div>
+      <a class="s-link" href="#add-template" onclick="setActive(this)">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="12" y1="5" x2="12" y2="19" />
+          <line x1="5" y1="12" x2="19" y2="12" />
+        </svg>
+        Add a Template
+      </a>
+      <a class="s-link" href="#guidelines" onclick="setActive(this)">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+          <polyline points="14 2 14 8 20 8" />
+        </svg>
+        Guidelines
+      </a>
+      <a class="s-link" href="#tags" onclick="setActive(this)">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z" />
+          <line x1="7" y1="7" x2="7.01" y2="7" />
+        </svg>
+        Tags Reference
+      </a>
+    </div>
+    <div style="margin-top:auto;display:flex;flex-direction:column;gap:.5rem">
+      <a href="../components.html" class="s-link"
+        style="background:rgba(232,130,10,.08);border-color:rgba(232,130,10,.2);color:var(--orange)">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="7" height="7" />
+          <rect x="14" y="3" width="7" height="7" />
+          <rect x="3" y="14" width="7" height="7" />
+          <rect x="14" y="14" width="7" height="7" />
+        </svg>
+        Browse Templates
+      </a>
+      <a href="https://github.com/muaves/templix" target="_blank" class="s-link">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path
+            d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" />
+        </svg>
+        GitHub
+      </a>
+    </div>
+  </aside>
+
+  <div class="main">
+    <div class="topbar">
+      <div class="tb-title">DOCUMENTATION</div>
+      <div class="tb-links">
+        <a href="../index.html">Home</a>
+        <a href="../components.html">Components</a>
+        <a href="../tools/color-grabber.html">Tools</a>
+        <a href="https://github.com/muaves/templix" target="_blank" class="tb-cta">GitHub</a>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <section class="doc-section" id="intro">
+        <div class="doc-label">GETTING STARTED</div>
+        <h1 class="doc-h1">TEMPLIX<br><em>DOCS.</em></h1>
+        <p class="doc-p">Templix is a library of <strong>standalone HTML & CSS components</strong>. Every template is a
+          single self-contained file — no build step, no npm install, no framework. Open the browser, copy, paste, ship.
+        </p>
+        <div class="two-col">
+          <div class="info-card">
+            <h4><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+              </svg> Zero setup</h4>
+            <p>No package manager, no bundler, no config file. Every template opens in a browser as-is.</p>
+          </div>
+          <div class="info-card">
+            <h4><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              </svg> MIT licensed</h4>
+            <p>Use in personal and commercial projects. No attribution required, though it's appreciated.</p>
+          </div>
+          <div class="info-card">
+            <h4><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="9" y="9" width="13" height="13" rx="2" />
+                <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
+              </svg> Copy-paste workflow</h4>
+            <p>See a component you like, hit copy in the viewer, paste it into your project. Done.</p>
+          </div>
+          <div class="info-card">
+            <h4><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+              </svg> Open source</h4>
+            <p>Fork it, extend it, submit templates. The library grows better with community contributions.</p>
+          </div>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <section class="doc-section" id="quickstart">
+        <h2 class="doc-h2">Quick Start</h2>
+        <p class="doc-p">The fastest way to use a Templix component is the copy-paste method. No install required.</p>
+        <div class="steps-list">
+          <div class="step-row">
+            <div class="step-num">1</div>
+            <div class="step-body">
+              <div class="step-title">Browse the component library</div>
+              <div class="step-desc">Go to <a href="../components.html" style="color:var(--orange)">components.html</a>
+                and filter by category or theme to find what you need.</div>
+            </div>
+          </div>
+          <div class="step-row">
+            <div class="step-num">2</div>
+            <div class="step-body">
+              <div class="step-title">Open the viewer</div>
+              <div class="step-desc">Click any card to open the full-screen preview with HTML, CSS, and JS split into
+                separate tabs.</div>
+            </div>
+          </div>
+          <div class="step-row">
+            <div class="step-num">3</div>
+            <div class="step-body">
+              <div class="step-title">Copy the code</div>
+              <div class="step-desc">Hit the Copy button on the tab you need. HTML, CSS, and JS are extracted separately
+                so you can take only what's relevant.</div>
+            </div>
+          </div>
+          <div class="step-row">
+            <div class="step-num">4</div>
+            <div class="step-body">
+              <div class="step-title">Paste into your project</div>
+              <div class="step-desc">Drop the markup into your HTML, the styles into your CSS file (or a style block),
+                and the script at the bottom of your body.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <strong>Tip:</strong> You can also clone or download the repo and open any template file directly in your
+          browser — each one is fully self-contained.
+        </div>
+
+        <h2 class="doc-h2">Clone the repo</h2>
+        <div class="code-block">
+          <div class="cb-bar"><span class="cb-lang">BASH</span><button class="cb-copy"
+              onclick="cbCopy(this)">Copy</button></div>
+          <div class="cb-body"><code><span class="t">git</span> clone https://github.com/muaves/templix.git
+<span class="t">cd</span> templix
+<span class="c"># open any template directly</span>
+<span class="t">open</span> navbars/glass.html</code></div>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <section class="doc-section" id="structure">
+        <h2 class="doc-h2">File Structure</h2>
+        <p class="doc-p">Templates are organised by category. Each template is a single <code
+            style="font-family:'Space Mono',monospace;font-size:.8em;color:var(--orange);background:rgba(232,130,10,.08);padding:1px 6px;border-radius:4px">.html</code>
+          file that includes its own styles and scripts inline.</p>
+        <div class="file-tree">
+          <span class="ft-dir">templix/</span>
+          ├── <span class="ft-file">index.html</span> <span class="ft-comment">← landing page</span>
+          ├── <span class="ft-file">components.html</span> <span class="ft-comment">← full component browser</span>
+          ├── <span class="ft-file">viewer.html</span> <span class="ft-comment">← template preview + code view</span>
+          ├── <span class="ft-file">about.html</span>
+          ├── <span class="ft-dir">assets/</span>
+          │ └── <span class="ft-file">templates.js</span> <span class="ft-comment">← central registry</span>
+          ├── <span class="ft-dir">docs/</span>
+          │ └── <span class="ft-file">index.html</span> <span class="ft-comment">← you are here</span>
+          ├── <span class="ft-dir">tools/</span>
+          │ ├── <span class="ft-file">color-grabber.html</span>
+          │ ├── <span class="ft-file">border-radius.html</span>
+          │ ├── <span class="ft-file">shadow-gen.html</span>
+          │ └── <span class="ft-file">gradient-gen.html</span>
+          ├── <span class="ft-dir">navbars/</span> <span class="ft-comment">← navbar templates</span>
+          ├── <span class="ft-dir">heroes/</span>
+          ├── <span class="ft-dir">footers/</span>
+          ├── <span class="ft-dir">modals/</span>
+          ├── <span class="ft-dir">tables/</span>
+          ├── <span class="ft-dir">galleries/</span>
+          ├── <span class="ft-dir">pricing/</span>
+          └── <span class="ft-dir">sidebars/</span>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <section class="doc-section" id="copy-paste">
+        <h2 class="doc-h2">Copy & Paste</h2>
+        <p class="doc-p">Each template file is split into three parts in the viewer. You can copy all three together or
+          grab just the pieces you need:</p>
+        <div class="two-col">
+          <div class="info-card">
+            <h4 style="color:#e06c75">HTML tab</h4>
+            <p>The markup only — styles and scripts stripped out. Paste directly into your body content.</p>
+          </div>
+          <div class="info-card">
+            <h4 style="color:#98c379">CSS tab</h4>
+            <p>The extracted style block. Drop into your stylesheet or a <code
+                style="font-family:'Space Mono',monospace;font-size:.75em;color:var(--orange)">&lt;style&gt;</code> tag.
+            </p>
+          </div>
+          <div class="info-card">
+            <h4 style="color:#61afef">JS tab</h4>
+            <p>Extracted JavaScript if the component has any. Paste before <code
+                style="font-family:'Space Mono',monospace;font-size:.75em;color:var(--orange)">&lt;/body&gt;</code>.</p>
+          </div>
+          <div class="info-card">
+            <h4>Full file</h4>
+            <p>Click Copy on the top-level button to grab the entire HTML file as-is, including all three parts.</p>
+          </div>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <section class="doc-section" id="customise">
+        <h2 class="doc-h2">Customising Templates</h2>
+        <p class="doc-p">Every template is plain HTML and CSS — you can change anything directly. The most common tweaks
+          are changing colors, fonts, and spacing.</p>
+        <div class="callout">
+          <strong>Fonts:</strong> Templates use Google Fonts loaded via CDN link. Swap the link href to change the font
+          family, then update the <code
+            style="font-family:'Space Mono',monospace;font-size:.85em;color:var(--orange)">font-family</code>
+          declarations.
+        </div>
+        <h2 class="doc-h2">Changing the color scheme</h2>
+        <p class="doc-p">Most templates use inline CSS — find the color hex values and replace them. For larger changes,
+          look for a <code
+            style="font-family:'Space Mono',monospace;font-size:.85em;color:var(--orange)">:root { }</code> block at the
+          top of the style tag — variables are defined there.</p>
+        <div class="code-block">
+          <div class="cb-bar"><span class="cb-lang">CSS</span><button class="cb-copy"
+              onclick="cbCopy(this)">Copy</button></div>
+          <div class="cb-body"><code><span class="c">/* override any template's root vars */</span>
+<span class="k">:root</span> {
+  <span class="t">--bg</span>: <span class="s">#0a0905</span>;
+  <span class="t">--orange</span>: <span class="s">#e8820a</span>;   <span class="c">/* swap this for your brand color */</span>
+  <span class="t">--text</span>: <span class="s">#e8e2d0</span>;
+  <span class="t">--muted</span>: <span class="s">#6b6452</span>;
+}</code></div>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <section class="doc-section" id="variables">
+        <h2 class="doc-h2">CSS Variables</h2>
+        <p class="doc-p">The shared design system uses these CSS custom properties. Override them in your own stylesheet
+          to retheme any component without touching its source:</p>
+        <div class="code-block">
+          <div class="cb-bar"><span class="cb-lang">CSS</span><button class="cb-copy"
+              onclick="cbCopy(this)">Copy</button></div>
+          <div class="cb-body"><code><span class="k">:root</span> {
+  <span class="c">/* backgrounds */</span>
+  <span class="t">--bg</span>: <span class="s">#0a0905</span>;         <span class="c">/* page background */</span>
+  <span class="t">--card</span>: <span class="s">#111009</span>;       <span class="c">/* card / surface */</span>
+  <span class="t">--border</span>: <span class="s">#1e1b12</span>;     <span class="c">/* default border */</span>
+
+  <span class="c">/* accent */</span>
+  <span class="t">--orange</span>: <span class="s">#e8820a</span>;     <span class="c">/* primary accent */</span>
+  <span class="t">--orange-light</span>: <span class="s">#f5a832</span>; <span class="c">/* hover state */</span>
+
+  <span class="c">/* text */</span>
+  <span class="t">--text</span>: <span class="s">#e8e2d0</span>;        <span class="c">/* primary text */</span>
+  <span class="t">--muted</span>: <span class="s">#6b6452</span>;      <span class="c">/* secondary / disabled */</span>
+}</code></div>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <section class="doc-section" id="add-template">
+        <h2 class="doc-h2">Adding a Template</h2>
+        <p class="doc-p">Contributing a new template is two steps. First, drop your HTML file in the right category
+          folder. Then register it in <code
+            style="font-family:'Space Mono',monospace;font-size:.85em;color:var(--orange)">assets/templates.js</code>.
+        </p>
+        <div class="steps-list">
+          <div class="step-row">
+            <div class="step-num">1</div>
+            <div class="step-body">
+              <div class="step-title">Create the template file</div>
+              <div class="step-desc">Make a self-contained HTML file. Inline all styles in a <code
+                  style="font-family:'Space Mono',monospace;font-size:.85em;color:var(--orange)">&lt;style&gt;</code>
+                tag and any scripts in a <code
+                  style="font-family:'Space Mono',monospace;font-size:.85em;color:var(--orange)">&lt;script&gt;</code>
+                tag. No external dependencies except Google Fonts.</div>
+            </div>
+          </div>
+          <div class="step-row">
+            <div class="step-num">2</div>
+            <div class="step-body">
+              <div class="step-title">Drop it in the right folder</div>
+              <div class="step-desc">e.g. <code
+                  style="font-family:'Space Mono',monospace;font-size:.85em;color:var(--orange)">navbars/my-navbar.html</code>
+              </div>
+            </div>
+          </div>
+          <div class="step-row">
+            <div class="step-num">3</div>
+            <div class="step-body">
+              <div class="step-title">Register it in templates.js</div>
+              <div class="step-desc">Add one object to the right array in <code
+                  style="font-family:'Space Mono',monospace;font-size:.85em;color:var(--orange)">assets/templates.js</code>.
+                That's the entire process.</div>
+            </div>
+          </div>
+        </div>
+        <div class="code-block">
+          <div class="cb-bar"><span class="cb-lang">JS</span><button class="cb-copy"
+              onclick="cbCopy(this)">Copy</button></div>
+          <div class="cb-body"><code>navbars: [
+  <span class="c">... existing entries ...</span>
+
+  {
+    <span class="t">id</span>:   <span class="s">"nav-my-navbar"</span>,
+    <span class="t">name</span>: <span class="s">"My Navbar"</span>,
+    <span class="t">file</span>: <span class="s">"navbars/my-navbar.html"</span>,
+    <span class="t">tags</span>: [<span class="s">"dark"</span>, <span class="s">"minimal"</span>],
+    <span class="t">desc</span>: <span class="s">"One sentence describing what makes this special."</span>
+  },
+],</code></div>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <section class="doc-section" id="guidelines">
+        <h2 class="doc-h2">Contribution Guidelines</h2>
+        <div class="callout warn"><strong>Quality over quantity.</strong> A template should look good, use clean markup,
+          and solve a real design problem. Don't submit generic Bootstrap-style components.</div>
+        <div class="steps-list">
+          <div class="step-row">
+            <div class="step-num"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg></div>
+            <div class="step-body">
+              <div class="step-title">Self-contained</div>
+              <div class="step-desc">One HTML file. All CSS inline. Only external dependency allowed: Google Fonts CDN.
+              </div>
+            </div>
+          </div>
+          <div class="step-row">
+            <div class="step-num"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg></div>
+            <div class="step-body">
+              <div class="step-title">No framework dependencies</div>
+              <div class="step-desc">No Bootstrap, Tailwind, Alpine, React. Vanilla HTML, CSS, and JS only.</div>
+            </div>
+          </div>
+          <div class="step-row">
+            <div class="step-num"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg></div>
+            <div class="step-body">
+              <div class="step-title">Readable code</div>
+              <div class="step-desc">Consistent indentation. Avoid deeply nested or cryptic selectors. Someone should be
+                able to understand it without comments.</div>
+            </div>
+          </div>
+          <div class="step-row">
+            <div class="step-num"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg></div>
+            <div class="step-body">
+              <div class="step-title">Responsive</div>
+              <div class="step-desc">Should look reasonable on mobile. At minimum, doesn't break. Ideally has a proper
+                responsive layout.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <section class="doc-section" id="tags">
+        <h2 class="doc-h2">Tags Reference</h2>
+        <p class="doc-p">Tags are used in the component browser for filtering. Use only established tags from this list
+          when registering a new template:</p>
+        <h3 style="font-size:.85rem;font-weight:600;color:var(--text);margin:1.5rem 0 .6rem">Theme</h3>
+        <div class="tag-grid">
+          <span class="tag orange">dark</span>
+          <span class="tag orange">light</span>
+        </div>
+        <h3 style="font-size:.85rem;font-weight:600;color:var(--text);margin:1.5rem 0 .6rem">Style</h3>
+        <div class="tag-grid">
+          <span class="tag">minimal</span><span class="tag">colorful</span><span class="tag">glass</span><span
+            class="tag">neon</span><span class="tag">retro</span><span class="tag">cinematic</span><span
+            class="tag">split</span><span class="tag">saas</span><span class="tag">mega</span><span
+            class="tag">cta</span><span class="tag">newsletter</span>
+        </div>
+        <h3 style="font-size:.85rem;font-weight:600;color:var(--text);margin:1.5rem 0 .6rem">Function</h3>
+        <div class="tag-grid">
+          <span class="tag">interactive</span><span class="tag">dashboard</span><span class="tag">portfolio</span><span
+            class="tag">grid</span><span class="tag">masonry</span><span class="tag">striped</span><span
+            class="tag">drawer</span><span class="tag">form</span><span class="tag">alert</span>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <script>
+    function setActive(el) {
+      document.querySelectorAll('.s-link').forEach(function (l) { l.classList.remove('active'); });
+      el.classList.add('active');
+    }
+
+    function cbCopy(btn) {
+      var code = btn.closest('.code-block').querySelector('code').textContent;
+      navigator.clipboard.writeText(code).then(function () {
+        btn.textContent = 'Copied!';
+        btn.classList.add('ok');
+        setTimeout(function () { btn.textContent = 'Copy'; btn.classList.remove('ok'); }, 1600);
+      });
+    }
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          var id = e.target.id;
+          document.querySelectorAll('.s-link').forEach(function (l) {
+            l.classList.toggle('active', l.getAttribute('href') === '#' + id);
+          });
+        }
+      });
+    }, { rootMargin: '-40% 0px -50% 0px' });
+
+    document.querySelectorAll('.doc-section[id]').forEach(function (s) { observer.observe(s); });
+  </script>
+</body>
+
+</html>
