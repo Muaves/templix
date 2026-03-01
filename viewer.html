@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Templix — Viewer</title>
+  <meta name="title" content="Templix. ">
+  <meta name="description"
+    content="This is Templix. A simple copy-paste HTML, CSS, JS template library for FREE forever.Please check it out!">
+  <meta name="keywords" content="templates, free, copy-paste">
+  <meta name="robots" content="index, follow">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="language" content="English">
+  <meta name="revisit-after" content="2 days">
+  <meta name="author" content="Muaves">
+  <link rel="icon" type="image/png" href="../Templix/favicon.ico">
+
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    :root {
+      --bg: #0a0905;
+      --code-bg: #0d0d0d;
+      --border: #1e1b12;
+      --orange: #e8820a;
+      --orange-light: #f5a832;
+      --text: #e8e2d0;
+      --muted: #6b6452;
+      --tab-h: 46px
+    }
+
+    html,
+    body {
+      height: 100%;
+      overflow: hidden
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      display: flex;
+      flex-direction: column
+    }
+
+    .topbar {
+      height: 52px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      padding: 0 1.25rem;
+      gap: 1rem;
+      flex-shrink: 0;
+      background: var(--bg)
+    }
+
+    .tb-back {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      color: var(--muted);
+      font-size: .82rem;
+      text-decoration: none;
+      transition: color .15s;
+      white-space: nowrap
+    }
+
+    .tb-back:hover {
+      color: var(--text)
+    }
+
+    .tb-sep {
+      color: var(--border);
+      font-size: .9rem
+    }
+
+    .tb-logo {
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      font-size: .95rem;
+      color: var(--text);
+      text-decoration: none
+    }
+
+    .tb-logo span {
+      color: var(--orange)
+    }
+
+    .tb-name {
+      font-size: .88rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-left: auto
+    }
+
+    .tb-tag {
+      background: rgba(232, 130, 10, .1);
+      border: 1px solid rgba(232, 130, 10, .2);
+      color: var(--orange);
+      border-radius: 5px;
+      padding: 2px 9px;
+      font-size: .65rem;
+      font-family: 'Space Mono', monospace;
+      letter-spacing: .07em
+    }
+
+    .tb-open {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      border-radius: 7px;
+      padding: 5px 12px;
+      font-size: .78rem;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      transition: all .15s;
+      text-decoration: none
+    }
+
+    .tb-open:hover {
+      border-color: rgba(255, 255, 255, .2);
+      color: var(--text)
+    }
+
+    .body {
+      flex: 1;
+      display: flex;
+      min-height: 0
+    }
+
+    .preview-pane {
+      flex: 1;
+      min-width: 0;
+      position: relative;
+      background: #000
+    }
+
+    .preview-pane iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block
+    }
+
+    .resize-handle {
+      width: 4px;
+      background: transparent;
+      cursor: col-resize;
+      flex-shrink: 0;
+      transition: background .15s
+    }
+
+    .resize-handle:hover,
+    .resize-handle.dragging {
+      background: var(--orange)
+    }
+
+    .code-pane {
+      width: 500px;
+      min-width: 260px;
+      max-width: 72%;
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      background: var(--code-bg)
+    }
+
+    .tab-bar {
+      height: var(--tab-h);
+      display: flex;
+      align-items: stretch;
+      border-bottom: 1px solid #181818;
+      padding: 0 .6rem;
+      flex-shrink: 0
+    }
+
+    .tab {
+      display: flex;
+      align-items: center;
+      gap: .45rem;
+      padding: 0 .9rem;
+      font-size: .8rem;
+      cursor: pointer;
+      color: #4a4a4a;
+      border-bottom: 2px solid transparent;
+      transition: color .15s;
+      white-space: nowrap;
+      user-select: none
+    }
+
+    .tab svg {
+      flex-shrink: 0
+    }
+
+    .tab:hover {
+      color: #888
+    }
+
+    .tab.active {
+      color: var(--text);
+      border-bottom-color: var(--orange)
+    }
+
+    .tab-actions {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: .5rem
+    }
+
+    .copy-btn {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      background: rgba(255, 255, 255, .07);
+      border: 1px solid rgba(255, 255, 255, .1);
+      color: var(--text);
+      border-radius: 7px;
+      padding: 5px 12px;
+      font-size: .78rem;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      transition: all .15s;
+      position: relative;
+      overflow: hidden
+    }
+
+    .copy-btn:hover {
+      background: rgba(255, 255, 255, .12);
+      border-color: rgba(255, 255, 255, .18)
+    }
+
+    .copy-btn.loading {
+      opacity: .6;
+      pointer-events: none
+    }
+
+    .copy-btn.success {
+      background: rgba(40, 200, 64, .15);
+      border-color: rgba(40, 200, 64, .35);
+      color: #28c840
+    }
+
+    .code-scroll {
+      flex: 1;
+      overflow: auto;
+      scrollbar-width: thin;
+      scrollbar-color: #2a2a2a transparent
+    }
+
+    .code-scroll::-webkit-scrollbar {
+      width: 5px;
+      height: 5px
+    }
+
+    .code-scroll::-webkit-scrollbar-thumb {
+      background: #252525;
+      border-radius: 3px
+    }
+
+    .code-inner {
+      display: flex;
+      padding: 1.1rem 1.2rem;
+      min-width: max-content
+    }
+
+    .line-nums {
+      color: #2e2e2e;
+      font-family: 'Space Mono', monospace;
+      font-size: .74rem;
+      line-height: 1.75;
+      text-align: right;
+      padding-right: 1.2rem;
+      user-select: none;
+      flex-shrink: 0;
+      min-width: 2.5rem
+    }
+
+    .code-text {
+      font-family: 'Space Mono', monospace;
+      font-size: .74rem;
+      line-height: 1.75;
+      white-space: pre;
+      color: #abb2bf
+    }
+
+    .ht {
+      color: #e06c75
+    }
+
+    .ha {
+      color: #d19a66
+    }
+
+    .hs {
+      color: #98c379
+    }
+
+    .cs {
+      color: #5c6370;
+      font-style: italic
+    }
+
+    .cs2 {
+      color: #61afef
+    }
+
+    .cp {
+      color: #56b6c2
+    }
+
+    .cv {
+      color: #98c379
+    }
+
+    .cn {
+      color: #d19a66
+    }
+
+    .ck {
+      color: #c678dd
+    }
+
+    .cf {
+      color: #61afef
+    }
+
+    .code-placeholder {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #2e2e2e;
+      font-family: 'Space Mono', monospace;
+      font-size: .78rem
+    }
+
+    .copy-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      background: rgba(5, 4, 2, .75);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s ease;
+    }
+
+    .copy-overlay.show {
+      opacity: 1;
+      pointer-events: all
+    }
+
+    .copy-overlay-card {
+      background: #111009;
+      border: 1px solid rgba(40, 200, 64, .25);
+      border-radius: 18px;
+      padding: 2.5rem 3rem;
+      text-align: center;
+      box-shadow: 0 32px 80px rgba(0, 0, 0, .9);
+      transform: scale(.92);
+      transition: transform .25s ease;
+    }
+
+    .copy-overlay.show .copy-overlay-card {
+      transform: scale(1)
+    }
+
+    .co-ring {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: rgba(40, 200, 64, .12);
+      border: 2px solid #28c840;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.2rem;
+      animation: ringPop .3s ease both;
+    }
+
+    .co-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: .35rem
+    }
+
+    .co-sub {
+      font-size: .8rem;
+      color: var(--muted)
+    }
+
+    .co-close {
+      margin-top: 1.5rem;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      border-radius: 8px;
+      padding: 7px 20px;
+      font-size: .8rem;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      transition: all .15s
+    }
+
+    .co-close:hover {
+      border-color: rgba(255, 255, 255, .2);
+      color: var(--text)
+    }
+
+    @keyframes ringPop {
+      from {
+        transform: scale(.6);
+        opacity: 0
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="copy-overlay" id="copyOverlay">
+    <div class="copy-overlay-card">
+      <div class="co-ring"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#28c840"
+          stroke-width="2.5">
+          <polyline points="20 6 9 17 4 12" />
+        </svg></div>
+      <div class="co-title">Copied to clipboard</div>
+      <div class="co-sub" id="coSub">HTML</div>
+      <button class="co-close" onclick="closeOverlay()">Close</button>
+    </div>
+  </div>
+
+  <div class="topbar">
+    <a href="components.html" class="tb-back">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M19 12H5M12 5l-7 7 7 7" />
+      </svg>
+      Components
+    </a>
+    <span class="tb-sep">/</span>
+    <a href="index.html" class="tb-logo">Templix<span>.</span></a>
+    <div class="tb-name" id="tbName">Loading...</div>
+    <span class="tb-tag" id="tbTag">—</span>
+    <a href="#" class="tb-open" id="tbOpen" target="_blank">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />
+        <polyline points="15 3 21 3 21 9" />
+        <line x1="10" y1="14" x2="21" y2="3" />
+      </svg>
+      Open
+    </a>
+  </div>
+
+  <div class="body">
+    <div class="preview-pane">
+      <iframe id="previewFrame" title="Preview"></iframe>
+    </div>
+    <div class="resize-handle" id="resizeHandle"></div>
+    <div class="code-pane" id="codePane">
+      <div class="tab-bar">
+        <div class="tab active" data-tab="html">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z" />
+            <polyline points="13 2 13 9 20 9" />
+          </svg>
+          HTML
+        </div>
+        <div class="tab" data-tab="css">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+            <line x1="9" y1="9" x2="9.01" y2="9" />
+            <line x1="15" y1="9" x2="15.01" y2="9" />
+          </svg>
+          CSS
+        </div>
+        <div class="tab" data-tab="js">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+            <polyline points="14 2 14 8 20 8" />
+          </svg>
+          JS
+        </div>
+        <div class="tab-actions">
+          <button class="copy-btn" id="copyBtn">
+            <svg id="copyIcon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2">
+              <rect x="9" y="9" width="13" height="13" rx="2" />
+              <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
+            </svg>
+            <span id="copyLabel">Copy</span>
+          </button>
+        </div>
+      </div>
+      <div class="code-scroll" id="codeScroll">
+        <div class="code-inner">
+          <div class="line-nums" id="lineNums">1</div>
+          <div class="code-text" id="codeText"><span style="color:#2e2e2e">Loading...</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/templates.js"></script>
+  <script>
+    var S = { file: '', name: '', tags: [], tab: 'html', raw: '', html: '', css: '', js: '' };
+
+    function qs(k) { return new URLSearchParams(location.search).get(k); }
+    function findTpl(id) { var c = Object.keys(REGISTRY); for (var i = 0; i < c.length; i++) { var l = REGISTRY[c[i]]; for (var j = 0; j < l.length; j++) { if (l[j].id === id) return l[j]; } } return null; }
+
+    function parseCode(src) {
+      var styleMatch = src.match(/<style[^>]*>([\s\S]*?)<\/style>/i);
+      var scriptMatch = src.match(/<script(?![^>]*src)[^>]*>([\s\S]*?)<\/script>/i);
+      var css = styleMatch ? styleMatch[1].trim() : '';
+      var js = scriptMatch ? scriptMatch[1].trim() : '';
+      var html = src.replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '').replace(/<script(?![^>]*src)[^>]*>[\s\S]*?<\/script>/gi, '').replace(/^\s*\n/gm, '').trim();
+      return { html: html, css: css, js: js };
+    }
+
+    function esc(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+
+    function hlHtml(s) {
+      s = esc(s);
+      s = s.replace(/(&lt;\/?)([\w-]+)/g, '<span class="ht">$1$2</span>');
+      s = s.replace(/ ([\w-]+)=(&quot;)/g, ' <span class="ha">$1</span>=$2');
+      s = s.replace(/(&quot;)(.*?)(&quot;)/g, '<span class="hs">$1$2$3</span>');
+      s = s.replace(/(&lt;!--[\s\S]*?--&gt;)/g, '<span class="cs">$1</span>');
+      return s;
+    }
+
+    function hlCss(s) {
+      s = esc(s);
+      s = s.replace(/(\/\*[\s\S]*?\*\/)/g, '<span class="cs">$1</span>');
+      s = s.replace(/([.#:[\w-]+(?:\s*[.#:[\w-]+)*)\s*\{/g, '<span class="cs2">$1</span> {');
+      s = s.replace(/([\w-]+)\s*:/g, '<span class="cp">$1</span>:');
+      s = s.replace(/:\s*([^;}\n\/]+)/g, function (m, v) { return ': <span class="cv">' + v + '</span>'; });
+      s = s.replace(/\b(\d+\.?\d*)(px|rem|em|vh|vw|%|s|ms)\b/g, '<span class="cn">$1$2</span>');
+      return s;
+    }
+
+    function hlJs(s) {
+      s = esc(s);
+      s = s.replace(/(\/\/[^\n]*)/g, '<span class="cs">$1</span>');
+      s = s.replace(/\b(var|let|const|function|return|if|else|for|while|new|this|typeof|instanceof|true|false|null|undefined)\b/g, '<span class="ck">$1</span>');
+      s = s.replace(/(['"``])([\s\S]*?)\1/g, '<span class="hs">$1$2$1</span>');
+      s = s.replace(/\b(\d+\.?\d*)\b/g, '<span class="cn">$1</span>');
+      s = s.replace(/\b([\w]+)(?=\s*\()/g, '<span class="cf">$1</span>');
+      return s;
+    }
+
+    function highlight(code, tab) {
+      if (tab === 'css') return hlCss(code);
+      if (tab === 'js') return hlJs(code);
+      return hlHtml(code);
+    }
+
+    function renderCode() {
+      var code = S[S.tab] || '';
+      if (!code.trim() && S.tab !== 'html') { code = ''; }
+      var hl = highlight(code, S.tab);
+      var lines = code ? code.split('\n') : [''];
+      document.getElementById('lineNums').textContent = lines.map(function (_, i) { return i + 1; }).join('\n');
+      document.getElementById('codeText').innerHTML = hl || '<span style="color:#2e2e2e">No ' + S.tab.toUpperCase() + ' code found.</span>';
+    }
+
+    function loadTpl(tpl) {
+      S.file = tpl.file; S.name = tpl.name; S.tags = tpl.tags;
+      document.getElementById('tbName').textContent = tpl.name;
+      document.getElementById('tbTag').textContent = tpl.tags[0] || '';
+      document.getElementById('tbOpen').href = tpl.file;
+      document.getElementById('previewFrame').src = tpl.file;
+      document.title = 'Templix — ' + tpl.name;
+      fetch(tpl.file).then(function (r) { return r.text(); }).then(function (src) {
+        S.raw = src;
+        var p = parseCode(src);
+        S.html = p.html; S.css = p.css; S.js = p.js;
+        renderCode();
+      }).catch(function () { S.raw = 'Could not load.'; S.html = S.raw; renderCode(); });
+    }
+
+    document.querySelectorAll('.tab[data-tab]').forEach(function (el) {
+      el.addEventListener('click', function () {
+        document.querySelectorAll('.tab[data-tab]').forEach(function (t) { t.classList.remove('active'); });
+        el.classList.add('active');
+        S.tab = el.dataset.tab;
+        renderCode();
+      });
+    });
+
+    var copyBtn = document.getElementById('copyBtn');
+    var overlay = document.getElementById('copyOverlay');
+    var overlayTimer;
+
+    function closeOverlay() { overlay.classList.remove('show'); }
+
+    copyBtn.addEventListener('click', function () {
+      var code = S[S.tab] || S.raw;
+      copyBtn.classList.add('loading');
+      navigator.clipboard.writeText(code).then(function () {
+        copyBtn.classList.remove('loading');
+        copyBtn.classList.add('success');
+        document.getElementById('copyIcon').innerHTML = '<polyline points="20 6 9 17 4 12"/>';
+        document.getElementById('copyIcon').setAttribute('viewBox', '0 0 24 24');
+        document.getElementById('copyLabel').textContent = 'Copied!';
+        document.getElementById('coSub').textContent = S.tab.toUpperCase() + ' — ' + S.name;
+        overlay.classList.add('show');
+        clearTimeout(overlayTimer);
+        overlayTimer = setTimeout(function () {
+          overlay.classList.remove('show');
+          copyBtn.classList.remove('success');
+          document.getElementById('copyLabel').textContent = 'Copy';
+          document.getElementById('copyIcon').innerHTML = '<rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>';
+        }, 2200);
+      }).catch(function () { copyBtn.classList.remove('loading'); });
+    });
+
+    overlay.addEventListener('click', function (e) { if (e.target === overlay) closeOverlay(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeOverlay(); });
+
+    var handle = document.getElementById('resizeHandle');
+    var dragging = false, startX = 0, startW = 0;
+    handle.addEventListener('mousedown', function (e) {
+      dragging = true; startX = e.clientX; startW = document.getElementById('codePane').offsetWidth;
+      handle.classList.add('dragging'); document.body.style.cursor = 'col-resize'; document.body.style.userSelect = 'none';
+    });
+    document.addEventListener('mousemove', function (e) {
+      if (!dragging) return;
+      var nw = Math.max(260, Math.min(startW + (startX - e.clientX), window.innerWidth * .72));
+      document.getElementById('codePane').style.width = nw + 'px';
+    });
+    document.addEventListener('mouseup', function () {
+      if (!dragging) return;
+      dragging = false; handle.classList.remove('dragging'); document.body.style.cursor = ''; document.body.style.userSelect = '';
+    });
+
+    var id = qs('id');
+    if (id) { var tpl = findTpl(id); if (tpl) loadTpl(tpl); else document.getElementById('tbName').textContent = 'Template not found'; }
+    else { document.getElementById('tbName').textContent = 'Select a template'; }
+  </script>
+</body>
+
+</html>

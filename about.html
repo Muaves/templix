@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Templix — About</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Space+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <meta name="title" content="Templix. ">
+    <meta name="description"
+        content="This is Templix. A simple copy-paste HTML, CSS, JS template library for FREE forever.Please check it out!">
+    <meta name="keywords" content="templates, free, copy-paste">
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="language" content="English">
+    <meta name="revisit-after" content="2 days">
+    <meta name="author" content="Muaves">
+    <link rel="icon" type="image/png" href="../Templix/favicon.ico">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        :root {
+            --bg: #0a0905;
+            --card: #111009;
+            --border: #1e1b12;
+            --orange: #e8820a;
+            --orange-light: #f5a832;
+            --text: #e8e2d0;
+            --muted: #6b6452;
+            --tag-bg: #1a1710
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            overflow-x: hidden
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2.5rem;
+            height: 64px;
+            border: 1px solid transparent;
+            transition: top .45s cubic-bezier(.4, 0, .2, 1), left .45s cubic-bezier(.4, 0, .2, 1), right .45s cubic-bezier(.4, 0, .2, 1), height .35s ease, padding .35s ease, background .35s ease, border-color .35s ease, border-radius .35s ease, box-shadow .35s ease
+        }
+
+        nav.scrolled {
+            top: 12px;
+            left: 20px;
+            right: 20px;
+            height: 52px;
+            padding: 0 1.4rem;
+            background: rgba(13, 11, 7, .93);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-color: rgba(255, 255, 255, .08);
+            border-radius: 14px;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, .55)
+        }
+
+        .logo {
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            font-size: 1.05rem;
+            letter-spacing: .06em;
+            color: var(--text);
+            text-decoration: none
+        }
+
+        .logo span {
+            color: var(--orange)
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.8rem
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            font-size: .85rem;
+            text-decoration: none;
+            transition: color .2s
+        }
+
+        .nav-links a:hover {
+            color: var(--text)
+        }
+
+        .nav-links a.active {
+            color: var(--text)
+        }
+
+        .nav-cta {
+            background: var(--orange);
+            color: #000;
+            border: none;
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 600;
+            font-size: .82rem;
+            padding: .5rem 1.15rem;
+            border-radius: 7px;
+            transition: background .2s, transform .1s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: .35rem
+        }
+
+        .nav-cta:hover {
+            background: var(--orange-light);
+            transform: translateY(-1px)
+        }
+
+        .hero {
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 2rem 5rem;
+            position: relative;
+            overflow: hidden;
+            text-align: center
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            background: radial-gradient(ellipse 60% 80% at 50% 20%, rgba(180, 80, 0, .14) 0%, transparent 65%)
+        }
+
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255, 255, 255, .006) 2px, rgba(255, 255, 255, .006) 4px)
+        }
+
+        .hero-label {
+            position: relative;
+            z-index: 1;
+            font-family: 'Space Mono', monospace;
+            font-size: .68rem;
+            letter-spacing: .22em;
+            color: var(--orange);
+            margin-bottom: 1.5rem;
+            animation: fadeUp .6s ease both
+        }
+
+        .hero-title {
+            position: relative;
+            z-index: 1;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(4rem, 11vw, 9rem);
+            line-height: .88;
+            color: var(--text);
+            animation: fadeUp .7s ease .1s both
+        }
+
+        .hero-title em {
+            color: var(--orange);
+            font-style: normal
+        }
+
+        .hero-sub {
+            position: relative;
+            z-index: 1;
+            max-width: 520px;
+            color: var(--muted);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin: 2rem auto 0;
+            animation: fadeUp .7s ease .2s both
+        }
+
+        .divider {
+            border: none;
+            border-top: 1px solid var(--border)
+        }
+
+        .manifesto {
+            padding: 7rem 3rem;
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 5rem;
+            align-items: start
+        }
+
+        .manifesto-label {
+            font-family: 'Space Mono', monospace;
+            font-size: .65rem;
+            letter-spacing: .22em;
+            color: var(--orange);
+            margin-bottom: 1rem
+        }
+
+        .manifesto-heading {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(2.5rem, 4vw, 3.8rem);
+            color: var(--text);
+            line-height: .92;
+            position: sticky;
+            top: 6rem
+        }
+
+        .manifesto-body {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem
+        }
+
+        .manifesto-body p {
+            font-size: 1rem;
+            color: var(--muted);
+            line-height: 1.8
+        }
+
+        .manifesto-body p strong {
+            color: var(--text);
+            font-weight: 500
+        }
+
+        .values {
+            padding: 6rem 3rem;
+            max-width: 1100px;
+            margin: 0 auto
+        }
+
+        .section-label {
+            font-family: 'Space Mono', monospace;
+            font-size: .65rem;
+            letter-spacing: .22em;
+            color: var(--orange);
+            margin-bottom: 1rem
+        }
+
+        .section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(2.5rem, 4vw, 3.8rem);
+            color: var(--text);
+            line-height: .92;
+            margin-bottom: 3.5rem
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem
+        }
+
+        .value-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 2rem;
+            transition: border-color .2s
+        }
+
+        .value-card:hover {
+            border-color: rgba(232, 130, 10, .3)
+        }
+
+        .value-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 9px;
+            background: rgba(232, 130, 10, .1);
+            border: 1px solid rgba(232, 130, 10, .18);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.2rem;
+            color: var(--orange)
+        }
+
+        .value-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: .6rem
+        }
+
+        .value-desc {
+            font-size: .88rem;
+            color: var(--muted);
+            line-height: 1.7
+        }
+
+        .stats-band {
+            margin: 0 3rem;
+            border-radius: 18px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            padding: 3rem;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            position: relative;
+            overflow: hidden
+        }
+
+        .stats-band::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 50% 100% at 0% 50%, rgba(232, 130, 10, .06), transparent 60%)
+        }
+
+        .stat-item {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 1rem
+        }
+
+        .stat-item+.stat-item {
+            border-left: 1px solid var(--border)
+        }
+
+        .stat-num {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            color: var(--text);
+            letter-spacing: .02em;
+            line-height: 1
+        }
+
+        .stat-num span {
+            color: var(--orange)
+        }
+
+        .stat-label {
+            font-size: .68rem;
+            letter-spacing: .16em;
+            color: var(--muted);
+            margin-top: .4rem;
+            font-family: 'Space Mono', monospace
+        }
+
+        .stack-section {
+            padding: 6rem 3rem;
+            max-width: 1100px;
+            margin: 0 auto
+        }
+
+        .stack-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.2rem;
+            margin-top: 3rem
+        }
+
+        .stack-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.2rem 1.4rem;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            transition: border-color .2s
+        }
+
+        .stack-item:hover {
+            border-color: rgba(232, 130, 10, .25)
+        }
+
+        .stack-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--orange);
+            flex-shrink: 0
+        }
+
+        .stack-name {
+            font-size: .92rem;
+            font-weight: 500;
+            color: var(--text)
+        }
+
+        .stack-desc {
+            font-size: .8rem;
+            color: var(--muted);
+            margin-top: .15rem
+        }
+
+        .oss-section {
+            padding: 6rem 3rem;
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center
+        }
+
+        .oss-text h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            color: var(--text);
+            line-height: .92;
+            margin-bottom: 1.5rem
+        }
+
+        .oss-text p {
+            font-size: .95rem;
+            color: var(--muted);
+            line-height: 1.75;
+            margin-bottom: 1.2rem
+        }
+
+        .oss-actions {
+            display: flex;
+            gap: .8rem;
+            flex-wrap: wrap;
+            margin-top: 2rem
+        }
+
+        .btn-primary {
+            background: var(--orange);
+            color: #000;
+            font-weight: 600;
+            font-size: .9rem;
+            border: none;
+            cursor: pointer;
+            padding: .75rem 1.6rem;
+            border-radius: 100px;
+            font-family: 'DM Sans', sans-serif;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: .45rem;
+            transition: background .2s, transform .15s
+        }
+
+        .btn-primary:hover {
+            background: var(--orange-light);
+            transform: translateY(-2px)
+        }
+
+        .btn-ghost {
+            background: rgba(255, 255, 255, .05);
+            border: 1px solid rgba(255, 255, 255, .1);
+            color: var(--text);
+            font-size: .9rem;
+            cursor: pointer;
+            padding: .75rem 1.6rem;
+            border-radius: 100px;
+            font-family: 'DM Sans', sans-serif;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: .45rem;
+            transition: background .2s, transform .15s
+        }
+
+        .btn-ghost:hover {
+            background: rgba(255, 255, 255, .1);
+            transform: translateY(-2px)
+        }
+
+        .oss-code {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            overflow: hidden
+        }
+
+        .oss-code-bar {
+            padding: .7rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            border-bottom: 1px solid var(--border)
+        }
+
+        .oss-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%
+        }
+
+        .oss-code-body {
+            padding: 1.5rem;
+            font-family: 'Space Mono', monospace;
+            font-size: .75rem;
+            line-height: 1.85;
+            color: #6b6452
+        }
+
+        .oss-code-body .k {
+            color: #c678dd
+        }
+
+        .oss-code-body .s {
+            color: #98c379
+        }
+
+        .oss-code-body .c {
+            color: #5c6370;
+            font-style: italic
+        }
+
+        .oss-code-body .o {
+            color: #e8820a
+        }
+
+        .author-section {
+            padding: 6rem 3rem;
+            max-width: 1100px;
+            margin: 0 auto
+        }
+
+        .author-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 3rem;
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            position: relative;
+            overflow: hidden
+        }
+
+        .author-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 60% 120% at 100% 50%, rgba(232, 130, 10, .05), transparent 60%)
+        }
+
+        .author-avatar {
+            width: 88px;
+            height: 88px;
+            border-radius: 50%;
+            background: rgba(232, 130, 10, .12);
+            border: 2px solid rgba(232, 130, 10, .25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            font-size: 2rem;
+            color: var(--orange);
+            flex-shrink: 0;
+            position: relative;
+            z-index: 1
+        }
+
+        .author-info {
+            position: relative;
+            z-index: 1;
+            flex: 1
+        }
+
+        .author-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.2rem;
+            color: var(--text);
+            letter-spacing: .03em;
+            line-height: 1;
+            margin-bottom: .3rem
+        }
+
+        .author-handle {
+            font-family: 'Space Mono', monospace;
+            font-size: .75rem;
+            color: var(--orange);
+            margin-bottom: 1rem;
+            letter-spacing: .06em
+        }
+
+        .author-bio {
+            font-size: .92rem;
+            color: var(--muted);
+            line-height: 1.7;
+            max-width: 520px
+        }
+
+        .author-links {
+            display: flex;
+            gap: .7rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap
+        }
+
+        .author-link {
+            display: inline-flex;
+            align-items: center;
+            gap: .4rem;
+            padding: .45rem .9rem;
+            background: rgba(255, 255, 255, .04);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: .8rem;
+            color: var(--muted);
+            text-decoration: none;
+            transition: all .15s;
+            font-family: 'DM Sans', sans-serif
+        }
+
+        .author-link:hover {
+            border-color: rgba(232, 130, 10, .3);
+            color: var(--text);
+            background: rgba(232, 130, 10, .06)
+        }
+
+        .footer-links a {
+            font-size: .82rem;
+            color: var(--muted);
+            text-decoration: none;
+            transition: color .15s
+        }
+
+        .footer-links a:hover {
+            color: var(--text)
+        }
+
+        .footer-made {
+            font-size: .75rem;
+            color: rgba(255, 255, 255, .2);
+            font-family: 'Space Mono', monospace
+        }
+
+        .footer-made a {
+            color: rgba(232, 130, 10, .55);
+            text-decoration: none;
+            transition: color .15s
+        }
+
+        .footer-made a:hover {
+            color: var(--orange)
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        @media(max-width:900px) {
+            .manifesto {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+                padding: 5rem 1.5rem
+            }
+
+            .manifesto-heading {
+                position: static
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr 1fr
+            }
+
+            .stats-band {
+                grid-template-columns: 1fr 1fr;
+                margin: 0 1.5rem
+            }
+
+            .stat-item+.stat-item {
+                border-left: none
+            }
+
+            .stat-item:nth-child(2n) {
+                border-left: 1px solid var(--border)
+            }
+
+            .stat-item:nth-child(n+3) {
+                border-top: 1px solid var(--border)
+            }
+
+            .stack-grid {
+                grid-template-columns: 1fr
+            }
+
+            .oss-section {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+                padding: 4rem 1.5rem
+            }
+
+            .author-card {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1.5rem;
+                padding: 2rem
+            }
+
+            .nav-links {
+                display: none
+            }
+
+            .values {
+                padding: 5rem 1.5rem
+            }
+
+            .stack-section {
+                padding: 4rem 1.5rem
+            }
+
+            .author-section {
+                padding: 4rem 1.5rem
+            }
+        }
+
+        @media(max-width:600px) {
+            .values-grid {
+                grid-template-columns: 1fr
+            }
+
+            .stats-band {
+                grid-template-columns: 1fr 1fr;
+                padding: 2rem 1.5rem
+            }
+
+            .hero {
+                padding: 7rem 1.5rem 4rem
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav id="mainNav">
+        <a href="index.html" class="logo">Templix<span>.</span></a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="components.html">Components</a>
+            <a href="about.html" class="active">About</a>
+            <a href="https://github.com/muaves/templix" target="_blank">GitHub</a>
+        </div>
+        <a href="components.html" class="nav-cta">Get Templates</a>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-label">ABOUT THE PROJECT</div>
+        <h1 class="hero-title">BUILT FOR<br>PEOPLE WHO<br>JUST WANT TO<br><em>SHIP.</em></h1>
+        <p class="hero-sub">No accounts. No paywalls. No npm install. Templix is a free, open-source library of HTML
+            &amp; CSS components you can copy and use anywhere.</p>
+    </section>
+
+    <hr class="divider">
+
+    <div class="manifesto">
+        <div>
+            <div class="manifesto-label">MANIFESTO</div>
+            <h2 class="manifesto-heading">WHY<br>TEMPLIX<br>EXISTS.</h2>
+        </div>
+        <div class="manifesto-body">
+            <p>Building a landing page shouldn't require installing a framework, spinning up a bundler, or signing up
+                for a SaaS. <strong>The web is made of HTML and CSS</strong> — and those two things are still more than
+                enough to build something beautiful.</p>
+            <p>Templix started as a personal collection of components built during late-night side projects. Navbars
+                that actually looked good. Hero sections without the purple gradient clichés. Footers that weren't
+                copy-pasted from Bootstrap.</p>
+            <p>The idea is simple: <strong>every component is a single standalone HTML file.</strong> Open it in a
+                browser, copy what you need, paste it into your project. No tree-shaking, no config files, no dependency
+                hell.</p>
+            <p>Templix is <strong>open source and free forever.</strong> If you use it, contribute back. Add a template,
+                fix a bug, improve the docs. The library grows better when more people put their taste into it.</p>
+        </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="values">
+        <div class="section-label">PRINCIPLES</div>
+        <div class="section-title">WHAT WE<br>CARE ABOUT.</div>
+        <div class="values-grid">
+            <div class="value-card">
+                <div class="value-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    </svg></div>
+                <div class="value-title">No dependencies</div>
+                <div class="value-desc">Every template runs in a browser with zero npm packages, zero build steps, zero
+                    config. Just a file.</div>
+            </div>
+            <div class="value-card">
+                <div class="value-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="2" y1="12" x2="22" y2="12" />
+                        <path
+                            d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
+                    </svg></div>
+                <div class="value-title">Open source</div>
+                <div class="value-desc">MIT licensed. Fork it, remix it, sell it in your own products. The only rule is
+                    give credit where it's due.</div>
+            </div>
+            <div class="value-card">
+                <div class="value-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <polygon
+                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                    </svg></div>
+                <div class="value-title">Design quality</div>
+                <div class="value-desc">Templates are crafted to look good — not generated, not copied from docs.
+                    Intentional spacing, type, and color.</div>
+            </div>
+            <div class="value-card">
+                <div class="value-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <polyline points="16 18 22 12 16 6" />
+                        <polyline points="8 6 2 12 8 18" />
+                    </svg></div>
+                <div class="value-title">Clean code</div>
+                <div class="value-desc">Readable, semantic HTML. CSS that makes sense. No inline spaghetti. Easy to
+                    understand and modify.</div>
+            </div>
+            <div class="value-card">
+                <div class="value-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" />
+                        <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
+                    </svg></div>
+                <div class="value-title">Copy-paste first</div>
+                <div class="value-desc">The workflow is intentionally simple. See something you like, grab the code, use
+                    it. No viewer required.</div>
+            </div>
+            <div class="value-card">
+                <div class="value-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                        <circle cx="9" cy="7" r="4" />
+                        <path d="M23 21v-2a4 4 0 00-3-3.87" />
+                        <path d="M16 3.13a4 4 0 010 7.75" />
+                    </svg></div>
+                <div class="value-title">Community driven</div>
+                <div class="value-desc">The library improves when people contribute. Submit a template, open an issue,
+                    share your fork.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="stats-band">
+        <div class="stat-item">
+            <div class="stat-num">26<span>+</span></div>
+            <div class="stat-label">TEMPLATES</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-num">8</div>
+            <div class="stat-label">CATEGORIES</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-num">0<span>$</span></div>
+            <div class="stat-label">FOREVER FREE</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-num">0</div>
+            <div class="stat-label">DEPENDENCIES</div>
+        </div>
+    </div>
+
+    <hr class="divider" style="margin-top:5rem">
+
+    <div class="stack-section">
+        <div class="section-label">TECH STACK</div>
+        <div class="section-title">NOTHING<br>FANCY.</div>
+        <div class="stack-grid">
+            <div class="stack-item">
+                <div class="stack-dot"></div>
+                <div>
+                    <div class="stack-name">HTML5</div>
+                    <div class="stack-desc">Semantic, accessible markup. No frameworks.</div>
+                </div>
+            </div>
+            <div class="stack-item">
+                <div class="stack-dot"></div>
+                <div>
+                    <div class="stack-name">CSS3 + Custom Properties</div>
+                    <div class="stack-desc">CSS variables for easy theming, no preprocessors.</div>
+                </div>
+            </div>
+            <div class="stack-item">
+                <div class="stack-dot"></div>
+                <div>
+                    <div class="stack-name">Vanilla JavaScript</div>
+                    <div class="stack-desc">Only when needed. No jQuery, no lodash, no bundler.</div>
+                </div>
+            </div>
+            <div class="stack-item">
+                <div class="stack-dot"></div>
+                <div>
+                    <div class="stack-name">Google Fonts</div>
+                    <div class="stack-desc">Bebas Neue, DM Sans, Space Mono — loaded via CDN.</div>
+                </div>
+            </div>
+            <div class="stack-item">
+                <div class="stack-dot"></div>
+                <div>
+                    <div class="stack-name">SVG Icons</div>
+                    <div class="stack-desc">Inline SVGs throughout. No icon font, no extra requests.</div>
+                </div>
+            </div>
+            <div class="stack-item">
+                <div class="stack-dot"></div>
+                <div>
+                    <div class="stack-name">MIT License</div>
+                    <div class="stack-desc">Use in personal and commercial projects, no restrictions.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="oss-section">
+        <div class="oss-text">
+            <div class="section-label">OPEN SOURCE</div>
+            <h2>CONTRIBUTE<br>ON GITHUB.</h2>
+            <p>Templix lives on GitHub. Found a bug? Want to add a template? Have opinions about the design? Pull
+                requests are open.</p>
+            <p>Adding a new template is two steps: drop the HTML file in the right folder, add one line to <code
+                    style="font-family:'Space Mono',monospace;font-size:.82rem;color:var(--orange);background:rgba(232,130,10,.08);padding:2px 6px;border-radius:4px">templates.js</code>.
+                That's the whole process.</p>
+            <div class="oss-actions">
+                <a href="https://github.com/muaves/templix" class="btn-primary" target="_blank">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path
+                            d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" />
+                    </svg>
+                    View on GitHub
+                </a>
+                <a href="components.html" class="btn-ghost">Browse Templates</a>
+            </div>
+        </div>
+        <div class="oss-code">
+            <div class="oss-code-bar">
+                <div class="oss-dot" style="background:#ff5f57"></div>
+                <div class="oss-dot" style="background:#febc2e"></div>
+                <div class="oss-dot" style="background:#28c840"></div>
+                <span
+                    style="font-family:'Space Mono',monospace;font-size:.65rem;color:var(--muted);margin-left:.5rem">templates.js</span>
+            </div>
+            <div class="oss-code-body"><span class="c">// 1. Add your HTML file to templates/navbars/</span>
+                <span class="c">// 2. Register it here — done.</span>
+
+                navbars: [
+                {
+                <span class="k">id</span>: <span class="s">"nav-glass"</span>,
+                <span class="k">name</span>: <span class="s">"Glassmorphic"</span>,
+                <span class="k">file</span>: <span class="s">"templates/navbars/glass.html"</span>,
+                <span class="k">tags</span>: [<span class="s">"dark"</span>, <span class="s">"glass"</span>]
+                },
+                <span class="c">// your template goes here</span>
+                {
+                <span class="k">id</span>: <span class="s">"nav-<span class="o">yours</span>"</span>,
+                <span class="k">name</span>: <span class="s">"Your Navbar"</span>,
+                <span class="k">file</span>: <span class="s">"templates/navbars/<span
+                        class="o">yours</span>.html"</span>,
+                <span class="k">tags</span>: [<span class="s">"dark"</span>, <span class="s">"minimal"</span>]
+                },
+                ],
+            </div>
+        </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="author-section">
+        <div class="section-label">THE MAKER</div>
+        <div class="author-card">
+            <div class="author-avatar">M</div>
+            <div class="author-info">
+                <div class="author-name">muaves</div>
+                <div class="author-handle">@muaves</div>
+                <p class="author-bio">Designer and developer. I build things for the web — mostly side projects that
+                    scratch some itch. Templix started as a personal stash of components and grew into something worth
+                    sharing. I care a lot about design quality and clean code.</p>
+                <div class="author-links">
+                    <a href="https://muaves.com" class="author-link" target="_blank">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="12" cy="12" r="10" />
+                            <line x1="2" y1="12" x2="22" y2="12" />
+                            <path
+                                d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
+                        </svg>
+                        muaves.com
+                    </a>
+                    <a href="https://github.com/muaves" class="author-link" target="_blank">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path
+                                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" />
+                        </svg>
+                        GitHub
+                    </a>
+                    <a href="https://templix.muaves.com" class="author-link" target="_blank">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />
+                            <polyline points="15 3 21 3 21 9" />
+                            <line x1="10" y1="14" x2="21" y2="3" />
+                        </svg>
+                        templix.muaves.com
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer style="border-top:1px solid var(--border);padding:2.5rem 3rem">
+        <div
+            style="max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem">
+            <a href="index.html" class="logo">Templix<span>.</span></a>
+            <div class="footer-links" style="display:flex;gap:1.5rem">
+                <a href="index.html">Home</a>
+                <a href="components.html">Components</a>
+                <a href="about.html">About</a>
+                <a href="https://github.com/muaves/templix" target="_blank">GitHub</a>
+            </div>
+            <span class="footer-made">made with care by <a href="https://muaves.com" target="_blank">muaves</a></span>
+        </div>
+    </footer>
+
+    <script>
+        var nav = document.getElementById('mainNav');
+        window.addEventListener('scroll', function () { nav.classList.toggle('scrolled', window.scrollY > 50); }, { passive: true });
+    </script>
+</body>
+
+</html>

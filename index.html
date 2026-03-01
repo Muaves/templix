@@ -1,0 +1,1723 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Templix — Free HTML &amp; CSS Templates</title>
+  <meta name="title" content="Templix. ">
+  <meta name="description"
+    content="This is Templix. A simple copy-paste HTML, CSS, JS template library for FREE forever.Please check it out!">
+  <meta name="keywords" content="templates, free, copy-paste">
+  <meta name="robots" content="index, follow">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="language" content="English">
+  <meta name="revisit-after" content="2 days">
+  <meta name="author" content="Muaves">
+  <link rel="icon" type="image/png" href="../Templix/favicon.ico">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600&family=Space+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    :root {
+      --bg: #0a0905;
+      --card: #111009;
+      --border: #1e1b12;
+      --orange: #e8820a;
+      --orange-light: #f5a832;
+      --text: #e8e2d0;
+      --muted: #6b6452;
+      --tag-bg: #1a1710
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+      height: 64px;
+      border: 1px solid transparent;
+      transition: top .45s cubic-bezier(.4, 0, .2, 1), left .45s cubic-bezier(.4, 0, .2, 1), right .45s cubic-bezier(.4, 0, .2, 1), height .35s ease, padding .35s ease, background .35s ease, border-color .35s ease, border-radius .35s ease, box-shadow .35s ease
+    }
+
+    nav.scrolled {
+      top: 12px;
+      left: 20px;
+      right: 20px;
+      height: 52px;
+      padding: 0 1.4rem;
+      background: rgba(13, 11, 7, .93);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-color: rgba(255, 255, 255, .08);
+      border-radius: 14px;
+      box-shadow: 0 8px 40px rgba(0, 0, 0, .55)
+    }
+
+    .logo {
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: .06em;
+      color: var(--text);
+      text-decoration: none
+    }
+
+    .logo span {
+      color: var(--orange)
+    }
+
+    .nav-center {
+      display: flex;
+      align-items: center;
+      gap: 1.8rem
+    }
+
+    .nav-center a {
+      color: var(--muted);
+      font-size: .85rem;
+      text-decoration: none;
+      transition: color .2s
+    }
+
+    .nav-center a:hover {
+      color: var(--text)
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: .8rem
+    }
+
+    .search-icon-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--muted);
+      padding: .4rem;
+      display: flex;
+      align-items: center;
+      transition: color .2s
+    }
+
+    .search-icon-btn:hover {
+      color: var(--text)
+    }
+
+    .cta-btn {
+      background: var(--orange);
+      color: #000;
+      border: none;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      font-size: .82rem;
+      padding: .5rem 1.15rem;
+      border-radius: 7px;
+      transition: background .2s, transform .1s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem
+    }
+
+    .cta-btn:hover {
+      background: var(--orange-light);
+      transform: translateY(-1px)
+    }
+
+    .dropdown-wrap {
+      position: relative
+    }
+
+    .dropdown-trigger {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--muted);
+      font-family: 'DM Sans', sans-serif;
+      font-size: .85rem;
+      display: flex;
+      align-items: center;
+      gap: .3rem;
+      padding: .3rem 0;
+      transition: color .2s
+    }
+
+    .dropdown-trigger:hover,
+    .dropdown-trigger.open {
+      color: var(--text)
+    }
+
+    .chevron {
+      transition: transform .22s ease;
+      display: inline-flex
+    }
+
+    .dropdown-trigger.open .chevron {
+      transform: rotate(180deg)
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: calc(100% + 18px);
+      left: 50%;
+      transform: translateX(-50%) translateY(-10px);
+      width: 520px;
+      background: rgba(13, 11, 7, .98);
+      border: 1px solid rgba(255, 255, 255, .09);
+      border-radius: 16px;
+      padding: 1rem;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, .75);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .22s ease, transform .22s ease;
+      backdrop-filter: blur(24px);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .3rem
+    }
+
+    .dropdown-menu::before {
+      content: '';
+      position: absolute;
+      top: -5px;
+      left: 50%;
+      width: 9px;
+      height: 9px;
+      background: rgba(13, 11, 7, .98);
+      border-left: 1px solid rgba(255, 255, 255, .09);
+      border-top: 1px solid rgba(255, 255, 255, .09);
+      transform: translateX(-50%) rotate(45deg)
+    }
+
+    .dropdown-menu.open {
+      opacity: 1;
+      pointer-events: all;
+      transform: translateX(-50%) translateY(0)
+    }
+
+    .dd-item {
+      display: flex;
+      align-items: center;
+      gap: .7rem;
+      padding: .6rem .75rem;
+      border-radius: 9px;
+      text-decoration: none;
+      color: var(--text);
+      transition: background .15s
+    }
+
+    .dd-item:hover {
+      background: rgba(255, 255, 255, .05)
+    }
+
+    .dd-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 7px;
+      flex-shrink: 0;
+      background: rgba(232, 130, 10, .1);
+      border: 1px solid rgba(232, 130, 10, .18);
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    .dd-name {
+      font-size: .83rem;
+      font-weight: 500
+    }
+
+    .dd-count {
+      font-size: .7rem;
+      color: var(--muted);
+      margin-top: 1px
+    }
+
+    .dd-divider {
+      grid-column: 1/-1;
+      height: 1px;
+      background: var(--border);
+      margin: .35rem 0
+    }
+
+    .dd-all {
+      grid-column: 1/-1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: .6rem .75rem;
+      border-radius: 9px;
+      text-decoration: none;
+      color: var(--orange);
+      font-size: .83rem;
+      font-weight: 500;
+      transition: background .15s
+    }
+
+    .dd-all:hover {
+      background: rgba(232, 130, 10, .07)
+    }
+
+    .search-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 300;
+      background: rgba(5, 4, 2, .88);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 11vh;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .22s ease
+    }
+
+    .search-overlay.open {
+      opacity: 1;
+      pointer-events: all
+    }
+
+    .search-box {
+      width: 100%;
+      max-width: 640px;
+      margin: 0 1.5rem;
+      transform: translateY(-18px);
+      transition: transform .26s ease
+    }
+
+    .search-overlay.open .search-box {
+      transform: translateY(0)
+    }
+
+    .search-input-wrap {
+      display: flex;
+      align-items: center;
+      background: rgba(18, 15, 10, .97);
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: 14px;
+      overflow: hidden;
+      position: relative
+    }
+
+    .search-input-wrap .si-icon {
+      position: absolute;
+      left: 1.1rem;
+      color: var(--muted);
+      pointer-events: none
+    }
+
+    .search-input {
+      flex: 1;
+      background: none;
+      border: none;
+      outline: none;
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1.1rem;
+      padding: 1.1rem .8rem 1.1rem 3.2rem
+    }
+
+    .search-input::placeholder {
+      color: var(--muted)
+    }
+
+    .search-kbd {
+      background: rgba(255, 255, 255, .06);
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: 6px;
+      padding: .25rem .55rem;
+      font-size: .7rem;
+      color: var(--muted);
+      font-family: 'Space Mono', monospace;
+      margin-right: .5rem;
+      cursor: pointer;
+      transition: background .2s, color .2s
+    }
+
+    .search-kbd:hover {
+      background: rgba(255, 255, 255, .1);
+      color: var(--text)
+    }
+
+    .search-results {
+      margin-top: .65rem;
+      background: rgba(14, 12, 8, .98);
+      border: 1px solid rgba(255, 255, 255, .07);
+      border-radius: 12px;
+      overflow: hidden;
+      max-height: 400px;
+      overflow-y: auto
+    }
+
+    .search-results::-webkit-scrollbar {
+      width: 4px
+    }
+
+    .search-results::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 2px
+    }
+
+    .s-suggestions {
+      padding: 1rem 1.1rem .6rem
+    }
+
+    .s-sugg-label {
+      font-size: .63rem;
+      letter-spacing: .2em;
+      color: var(--muted);
+      margin-bottom: .6rem;
+      font-family: 'Space Mono', monospace
+    }
+
+    .s-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem
+    }
+
+    .chip {
+      background: rgba(255, 255, 255, .04);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: .28rem .75rem;
+      font-size: .78rem;
+      color: var(--muted);
+      cursor: pointer;
+      transition: background .15s, color .15s, border-color .15s
+    }
+
+    .chip:hover {
+      background: rgba(232, 130, 10, .08);
+      border-color: rgba(232, 130, 10, .3);
+      color: var(--orange-light)
+    }
+
+    .s-result {
+      display: flex;
+      align-items: center;
+      gap: .9rem;
+      padding: .8rem 1.1rem;
+      cursor: pointer;
+      border-bottom: 1px solid rgba(255, 255, 255, .04);
+      transition: background .15s
+    }
+
+    .s-result:last-child {
+      border-bottom: none
+    }
+
+    .s-result:hover {
+      background: rgba(255, 255, 255, .04)
+    }
+
+    .s-icon {
+      font-size: .9rem;
+      width: 26px;
+      text-align: center;
+      color: var(--orange)
+    }
+
+    .s-name {
+      font-size: .88rem;
+      font-weight: 500
+    }
+
+    .s-cat {
+      font-size: .7rem;
+      color: var(--muted);
+      font-family: 'Space Mono', monospace;
+      letter-spacing: .08em;
+      margin-top: 1px
+    }
+
+    .s-badge {
+      margin-left: auto;
+      font-size: .68rem;
+      color: var(--orange);
+      background: rgba(232, 130, 10, .1);
+      border: 1px solid rgba(232, 130, 10, .2);
+      border-radius: 4px;
+      padding: .12rem .4rem
+    }
+
+    .s-empty {
+      padding: 2.5rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: .9rem
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 6rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+      text-align: center
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background: radial-gradient(ellipse 70% 60% at 50% 40%, rgba(180, 80, 0, .18) 0%, transparent 70%), radial-gradient(ellipse 40% 40% at 80% 60%, rgba(120, 60, 0, .12) 0%, transparent 60%), radial-gradient(ellipse 60% 80% at 20% 70%, rgba(60, 30, 0, .1) 0%, transparent 60%)
+    }
+
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255, 255, 255, .007) 2px, rgba(255, 255, 255, .007) 4px)
+    }
+
+    .badge {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      border: 1px solid rgba(232, 130, 10, .3);
+      background: rgba(232, 130, 10, .08);
+      border-radius: 100px;
+      padding: .4rem 1rem;
+      font-size: .75rem;
+      letter-spacing: .08em;
+      color: var(--orange-light);
+      margin-bottom: 2.5rem;
+      animation: fadeUp .6s ease both
+    }
+
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--orange);
+      border-radius: 50%;
+      animation: pulse 2s infinite
+    }
+
+    .hero-title {
+      position: relative;
+      z-index: 1;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(5rem, 14vw, 13rem);
+      line-height: .88;
+      letter-spacing: .01em;
+      animation: fadeUp .7s ease .1s both
+    }
+
+    .hero-title .line1,
+    .hero-title .line2 {
+      color: var(--text);
+      display: block
+    }
+
+    .hero-title .line3 {
+      color: var(--orange);
+      display: block
+    }
+
+    .hero-title .line4 {
+      color: var(--orange-light);
+      display: block
+    }
+
+    .hero-sub {
+      position: relative;
+      z-index: 1;
+      max-width: 520px;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.65;
+      margin: 2.5rem auto;
+      animation: fadeUp .7s ease .2s both
+    }
+
+    .hero-actions {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeUp .7s ease .3s both
+    }
+
+    .btn-primary {
+      background: var(--orange);
+      color: #000;
+      font-weight: 600;
+      font-size: .95rem;
+      border: none;
+      cursor: pointer;
+      padding: .8rem 1.8rem;
+      border-radius: 100px;
+      font-family: 'DM Sans', sans-serif;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      transition: background .2s, transform .15s
+    }
+
+    .btn-primary:hover {
+      background: var(--orange-light);
+      transform: translateY(-2px)
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, .06);
+      border: 1px solid rgba(255, 255, 255, .1);
+      color: var(--text);
+      font-size: .95rem;
+      cursor: pointer;
+      padding: .8rem 1.8rem;
+      border-radius: 100px;
+      font-family: 'DM Sans', sans-serif;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      transition: background .2s, transform .15s
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, .1);
+      transform: translateY(-2px)
+    }
+
+    .stats {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      gap: 4rem;
+      justify-content: center;
+      margin-top: 4rem;
+      animation: fadeUp .7s ease .4s both;
+      flex-wrap: wrap
+    }
+
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.5rem;
+      color: var(--text);
+      letter-spacing: .02em
+    }
+
+    .stat-label {
+      font-size: .7rem;
+      letter-spacing: .14em;
+      color: var(--muted);
+      margin-top: .2rem;
+      font-family: 'Space Mono', monospace
+    }
+
+    .scroll-hint {
+      position: relative;
+      z-index: 1;
+      margin-top: 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .4rem;
+      font-size: .65rem;
+      letter-spacing: .2em;
+      color: var(--muted);
+      font-family: 'Space Mono', monospace;
+      animation: fadeUp .7s ease .5s both
+    }
+
+    .scroll-arrow {
+      animation: bounce 1.5s infinite
+    }
+
+    .ticker {
+      overflow: hidden;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 1.1rem 0;
+      background: rgba(0, 0, 0, .2)
+    }
+
+    .ticker-track {
+      display: flex;
+      white-space: nowrap;
+      animation: tickerAnim 28s linear infinite
+    }
+
+    .ticker-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 0 1.5rem;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: .06em;
+      color: var(--muted)
+    }
+
+    .ticker-star {
+      color: var(--orange);
+      font-size: .9rem
+    }
+
+    .section {
+      padding: 6rem 3rem;
+      max-width: 1300px;
+      margin: 0 auto
+    }
+
+    .section-label {
+      font-size: .7rem;
+      letter-spacing: .2em;
+      color: var(--orange);
+      font-family: 'Space Mono', monospace;
+      margin-bottom: 1rem
+    }
+
+    .section-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 2rem;
+      margin-bottom: 3rem;
+      flex-wrap: wrap
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      line-height: .95;
+      letter-spacing: .02em
+    }
+
+    .section-desc {
+      max-width: 340px;
+      color: var(--muted);
+      font-size: .9rem;
+      line-height: 1.65;
+      padding-top: .5rem
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: border-color .25s, transform .25s;
+      display: block;
+      text-decoration: none
+    }
+
+    .card:hover {
+      border-color: rgba(232, 130, 10, .35);
+      transform: translateY(-4px)
+    }
+
+    .card-preview {
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+      background: #0d0b07;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    .card-overlay-hover {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity .2s;
+      background: rgba(0, 0, 0, .55);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .6rem
+    }
+
+    .card:hover .card-overlay-hover {
+      opacity: 1
+    }
+
+    .ov-btn {
+      background: var(--orange);
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-size: .8rem;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      transition: background .15s;
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      white-space: nowrap
+    }
+
+    .ov-btn:hover {
+      background: var(--orange-light)
+    }
+
+    .ov-btn.ghost {
+      background: rgba(255, 255, 255, .14);
+      color: var(--text)
+    }
+
+    .ov-btn.ghost:hover {
+      background: rgba(255, 255, 255, .24)
+    }
+
+    .ov-btn.copied {
+      background: rgba(40, 200, 64, .2);
+      color: #28c840;
+      border: none
+    }
+
+    .card-info {
+      padding: 1.1rem 1.2rem
+    }
+
+    .card-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: .5rem
+    }
+
+    .card-category {
+      font-size: .65rem;
+      letter-spacing: .16em;
+      color: var(--orange);
+      font-family: 'Space Mono', monospace
+    }
+
+    .card-name {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: .75rem
+    }
+
+    .card-tags {
+      display: flex;
+      gap: .4rem;
+      flex-wrap: wrap
+    }
+
+    .tag {
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: .2rem .5rem;
+      font-size: .7rem;
+      color: var(--muted);
+      font-family: 'Space Mono', monospace
+    }
+
+    .preview-glass {
+      background: linear-gradient(135deg, #1a1520, #0d1020)
+    }
+
+    .preview-smoke {
+      background: linear-gradient(135deg, #0a0a0a, #1a1a1a)
+    }
+
+    .preview-split {
+      background: linear-gradient(135deg, #2a3a6a, #1a2a5a)
+    }
+
+    .preview-saas {
+      background: linear-gradient(135deg, #050d1a, #0a1525)
+    }
+
+    .preview-mega {
+      background: linear-gradient(135deg, #080706, #0f0d08)
+    }
+
+    .preview-3tier {
+      background: linear-gradient(135deg, #0a0905, #111009)
+    }
+
+    .preview-light {
+      background: linear-gradient(135deg, #f5f0e8, #e8e0d0)
+    }
+
+    .mock {
+      width: 75%;
+      background: rgba(255, 255, 255, .05);
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, .1);
+      overflow: hidden
+    }
+
+    .mock-bar {
+      height: 26px;
+      background: rgba(255, 255, 255, .06);
+      border-bottom: 1px solid rgba(255, 255, 255, .08);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 0 8px
+    }
+
+    .mock-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .2)
+    }
+
+    .mock-body {
+      padding: 10px
+    }
+
+    .mock-line {
+      height: 5px;
+      border-radius: 3px;
+      background: rgba(255, 255, 255, .1);
+      margin-bottom: 5px
+    }
+
+    .mock-btn {
+      height: 16px;
+      width: 48px;
+      border-radius: 3px;
+      background: var(--orange);
+      margin-top: 7px
+    }
+
+    .mock-light {
+      background: rgba(0, 0, 0, .05);
+      border-color: rgba(0, 0, 0, .08)
+    }
+
+    .mock-light .mock-bar {
+      background: rgba(0, 0, 0, .04);
+      border-color: rgba(0, 0, 0, .07)
+    }
+
+    .mock-light .mock-line {
+      background: rgba(0, 0, 0, .12)
+    }
+
+    .smoke-particles {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 30% 50%, rgba(180, 180, 180, .15) 0%, transparent 60%), radial-gradient(ellipse at 70% 30%, rgba(150, 150, 150, .1) 0%, transparent 50%)
+    }
+
+    .view-all-wrap {
+      text-align: center;
+      margin-top: 3rem
+    }
+
+    .view-all-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: .9rem;
+      cursor: pointer;
+      padding: .75rem 2rem;
+      border-radius: 100px;
+      font-family: 'DM Sans', sans-serif;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      transition: border-color .2s, background .2s
+    }
+
+    .view-all-btn:hover {
+      border-color: var(--orange);
+      background: rgba(232, 130, 10, .05)
+    }
+
+    .browse-band {
+      margin: 0 3rem 6rem;
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      background: linear-gradient(135deg, #111009, #1a1510 50%, #0f0d07);
+      border: 1px solid rgba(232, 130, 10, .15)
+    }
+
+    .browse-band-glow {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 15% 50%, rgba(232, 130, 10, .09), transparent 60%)
+    }
+
+    .browse-band-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      padding: 3.5rem 4rem;
+      flex-wrap: wrap
+    }
+
+    .browse-band-text {
+      flex: 1;
+      min-width: 280px
+    }
+
+    .browse-band-text .lbl {
+      font-family: 'Space Mono', monospace;
+      font-size: .65rem;
+      letter-spacing: .22em;
+      color: var(--orange);
+      margin-bottom: .9rem
+    }
+
+    .browse-band-text h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.2rem, 4vw, 3.8rem);
+      color: var(--text);
+      line-height: .92;
+      margin-bottom: 1rem
+    }
+
+    .browse-band-text p {
+      color: var(--muted);
+      font-size: .92rem;
+      line-height: 1.65;
+      max-width: 420px
+    }
+
+    .browse-band-side {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: flex-start
+    }
+
+    .cat-pills {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .45rem;
+      margin-bottom: .5rem
+    }
+
+    .cat-pill {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .55rem .85rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, .03);
+      color: var(--muted);
+      font-size: .8rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all .15s;
+      white-space: nowrap
+    }
+
+    .cat-pill:hover,
+    .cat-pill:focus {
+      border-color: rgba(232, 130, 10, .35);
+      background: rgba(232, 130, 10, .07);
+      color: var(--text)
+    }
+
+    .cat-pill svg {
+      opacity: .55;
+      flex-shrink: 0
+    }
+
+    .cat-pill:hover svg,
+    .cat-pill:focus svg {
+      opacity: 1
+    }
+
+    .browse-big-btn {
+      background: var(--orange);
+      color: #000;
+      border: none;
+      border-radius: 10px;
+      padding: 1rem 2.2rem;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      width: 100%;
+      justify-content: center;
+      transition: background .2s, transform .15s
+    }
+
+    .browse-big-btn:hover {
+      background: var(--orange-light);
+      transform: translateY(-2px)
+    }
+
+    .how-section {
+      padding: 5rem 3rem;
+      max-width: 1300px;
+      margin: 0 auto
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3rem
+    }
+
+    .step {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 2rem
+    }
+
+    .step-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3.5rem;
+      color: rgba(232, 130, 10, .2);
+      line-height: 1;
+      margin-bottom: 1rem
+    }
+
+    .step-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: .5rem
+    }
+
+    .step-desc {
+      font-size: .88rem;
+      color: var(--muted);
+      line-height: 1.65
+    }
+
+    .site-footer {
+      border-top: 1px solid var(--border);
+      padding: 3rem
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 2rem;
+      max-width: 1300px;
+      margin: 0 auto 2.5rem
+    }
+
+    .footer-logo-desc p {
+      font-size: .85rem;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 240px;
+      margin-top: .7rem
+    }
+
+    .footer-col h4 {
+      font-family: 'Space Mono', monospace;
+      font-size: .62rem;
+      letter-spacing: .18em;
+      color: var(--text);
+      margin-bottom: .9rem
+    }
+
+    .footer-col a {
+      display: block;
+      font-size: .83rem;
+      color: var(--muted);
+      text-decoration: none;
+      margin-bottom: .5rem;
+      transition: color .15s
+    }
+
+    .footer-col a:hover {
+      color: var(--text)
+    }
+
+    .footer-bottom {
+      max-width: 1300px;
+      margin: 0 auto;
+      border-top: 1px solid rgba(255, 255, 255, .05);
+      padding-top: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem
+    }
+
+    .footer-copy {
+      font-size: .78rem;
+      color: var(--muted)
+    }
+
+    .footer-made {
+      font-size: .75rem;
+      color: rgba(255, 255, 255, .2);
+      font-family: 'Space Mono', monospace
+    }
+
+    .footer-made a {
+      color: rgba(232, 130, 10, .55);
+      text-decoration: none;
+      transition: color .15s
+    }
+
+    .footer-made a:hover {
+      color: var(--orange)
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(24px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    @keyframes bounce {
+
+      0%,
+      100% {
+        transform: translateY(0)
+      }
+
+      50% {
+        transform: translateY(5px)
+      }
+    }
+
+    @keyframes tickerAnim {
+      0% {
+        transform: translateX(0)
+      }
+
+      100% {
+        transform: translateX(-50%)
+      }
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1)
+      }
+
+      50% {
+        opacity: .4;
+        transform: scale(.7)
+      }
+    }
+
+    @media(max-width:900px) {
+      .cards-grid {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      .nav-center {
+        display: none
+      }
+
+      .steps {
+        grid-template-columns: 1fr
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr 1fr
+      }
+
+      .browse-band {
+        margin: 0 1.5rem 4rem
+      }
+
+      .browse-band-inner {
+        padding: 2.5rem 2rem
+      }
+    }
+
+    @media(max-width:600px) {
+      .cards-grid {
+        grid-template-columns: 1fr
+      }
+
+      .section {
+        padding: 4rem 1.5rem
+      }
+
+      .stats {
+        gap: 2rem
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="search-overlay" id="searchOverlay">
+    <div class="search-box">
+      <div class="search-input-wrap">
+        <svg class="si-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2">
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.35-4.35" />
+        </svg>
+        <input class="search-input" id="searchInput" type="text" placeholder="Search components..." autocomplete="off"
+          spellcheck="false">
+        <span class="search-kbd" id="searchClose">ESC</span>
+      </div>
+      <div class="search-results" id="searchResults"></div>
+    </div>
+  </div>
+
+  <nav id="mainNav">
+    <a href="index.html" class="logo">Templix<span>.</span></a>
+    <div class="nav-center">
+      <div class="dropdown-wrap" id="dropWrap">
+        <button class="dropdown-trigger" id="dropTrigger">
+          Components
+          <span class="chevron"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2.5">
+              <polyline points="6 9 12 15 18 9" />
+            </svg></span>
+        </button>
+        <div class="dropdown-menu" id="dropMenu">
+          <a href="components.html#navbars" class="dd-item">
+            <div class="dd-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <line x1="3" y1="6" x2="21" y2="6" />
+                <line x1="3" y1="12" x2="21" y2="12" />
+              </svg></div>
+            <div>
+              <div class="dd-name">Navbars</div>
+              <div class="dd-count">6 templates</div>
+            </div>
+          </a>
+          <a href="components.html#heroes" class="dd-item">
+            <div class="dd-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <rect x="3" y="3" width="18" height="18" rx="2" />
+                <path d="M3 9h18" />
+              </svg></div>
+            <div>
+              <div class="dd-name">Heroes</div>
+              <div class="dd-count">5 templates</div>
+            </div>
+          </a>
+          <a href="components.html#footers" class="dd-item">
+            <div class="dd-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <line x1="3" y1="20" x2="21" y2="20" />
+                <path d="M5 20V8l7-5 7 5v12" />
+              </svg></div>
+            <div>
+              <div class="dd-name">Footers</div>
+              <div class="dd-count">4 templates</div>
+            </div>
+          </a>
+          <a href="components.html#modals" class="dd-item">
+            <div class="dd-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <rect x="3" y="5" width="18" height="14" rx="2" />
+              </svg></div>
+            <div>
+              <div class="dd-name">Modals</div>
+              <div class="dd-count">3 templates</div>
+            </div>
+          </a>
+          <a href="components.html#tables" class="dd-item">
+            <div class="dd-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <path
+                  d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18" />
+              </svg></div>
+            <div>
+              <div class="dd-name">Tables</div>
+              <div class="dd-count">3 templates</div>
+            </div>
+          </a>
+          <a href="components.html#galleries" class="dd-item">
+            <div class="dd-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <rect x="3" y="3" width="7" height="7" />
+                <rect x="14" y="3" width="7" height="7" />
+                <rect x="3" y="14" width="7" height="7" />
+                <rect x="14" y="14" width="7" height="7" />
+              </svg></div>
+            <div>
+              <div class="dd-name">Galleries</div>
+              <div class="dd-count">3 templates</div>
+            </div>
+          </a>
+          <a href="components.html#pricing" class="dd-item">
+            <div class="dd-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <line x1="12" y1="1" x2="12" y2="23" />
+                <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
+              </svg></div>
+            <div>
+              <div class="dd-name">Pricing</div>
+              <div class="dd-count">1 template</div>
+            </div>
+          </a>
+          <a href="components.html#sidebars" class="dd-item">
+            <div class="dd-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <rect x="3" y="3" width="18" height="18" rx="2" />
+                <path d="M9 3v18" />
+              </svg></div>
+            <div>
+              <div class="dd-name">Sidebars</div>
+              <div class="dd-count">1 template</div>
+            </div>
+          </a>
+          <div class="dd-divider"></div>
+          <a href="components.html" class="dd-all">Browse all 26 templates <svg width="13" height="13"
+              viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg></a>
+        </div>
+      </div>
+      <a href="components.html">Browse All</a>
+      <a href="about.html">About</a>
+      <a href="https://github.com/muaves/templix" target="_blank">GitHub</a>
+    </div>
+    <div class="nav-right">
+      <button class="search-icon-btn" id="searchOpen" aria-label="Search">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.35-4.35" />
+        </svg>
+      </button>
+      <a href="components.html" class="cta-btn">Get Templates</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="badge"><span class="badge-dot"></span> 100% FREE — NO SIGN-UPS</div>
+    <h1 class="hero-title">
+      <span class="line1">UI</span>
+      <span class="line2">components</span>
+      <span class="line3">ready to</span>
+      <span class="line4">ship.</span>
+    </h1>
+    <p class="hero-sub">Navbars, hero sections, footers, galleries, pricing tables — all in pure HTML &amp; CSS. Grab
+      the code and go.</p>
+    <div class="hero-actions">
+      <a href="components.html" class="btn-primary">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <rect x="3" y="3" width="7" height="7" />
+          <rect x="14" y="3" width="7" height="7" />
+          <rect x="3" y="14" width="7" height="7" />
+          <rect x="14" y="14" width="7" height="7" />
+        </svg>
+        Browse Components
+      </a>
+      <a href="#how" class="btn-secondary">How it works</a>
+    </div>
+    <div class="stats">
+      <div class="stat-item">
+        <div class="stat-num">26+</div>
+        <div class="stat-label">COMPONENTS</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">0$</div>
+        <div class="stat-label">ALWAYS</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">8</div>
+        <div class="stat-label">CATEGORIES</div>
+      </div>
+    </div>
+    <div class="scroll-hint">SCROLL<svg class="scroll-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2">
+        <path d="M12 5v14M5 12l7 7 7-7" />
+      </svg></div>
+  </section>
+
+  <div class="ticker">
+    <div class="ticker-track">
+      <span class="ticker-item">Sidebars <span class="ticker-star">&#10022;</span></span>
+      <span class="ticker-item">Modals <span class="ticker-star">&#10022;</span></span>
+      <span class="ticker-item">Tables <span class="ticker-star">&#10022;</span></span>
+      <span class="ticker-item">Navbars <span class="ticker-star">&#10022;</span></span>
+      <span class="ticker-item">Footers <span class="ticker-star">&#10022;</span></span>
+      <span class="ticker-item">Hero Sections <span class="ticker-star">&#10022;</span></span>
+      <span class="ticker-item">Galleries <span class="ticker-star">&#10022;</span></span>
+      <span class="ticker-item">Pricing Tables <span class="ticker-star">&#10022;</span></span>
+      <span class="ticker-item">Sidebars <span class="ticker-star">&#10022;</span></span>
+      <span class="ticker-item">Modals <span class="ticker-star">&#10022;</span></span>
+      <span class="ticker-item">Tables <span class="ticker-star">&#10022;</span></span>
+      <span class="ticker-item">Navbars <span class="ticker-star">&#10022;</span></span>
+      <span class="ticker-item">Footers <span class="ticker-star">&#10022;</span></span>
+      <span class="ticker-item">Hero Sections <span class="ticker-star">&#10022;</span></span>
+      <span class="ticker-item">Galleries <span class="ticker-star">&#10022;</span></span>
+      <span class="ticker-item">Pricing Tables <span class="ticker-star">&#10022;</span></span>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">CURATED COLLECTION</p>
+    <div class="section-header">
+      <h2 class="section-title">Featured<br>Components</h2>
+      <p class="section-desc">Navbars, footers, hero sections, image galleries — hand-built with clean, semantic HTML
+        &amp; CSS.</p>
+    </div>
+    <div class="cards-grid" id="featGrid"></div>
+    <div class="view-all-wrap">
+      <a href="components.html" class="view-all-btn">View all 26 components <svg width="13" height="13"
+          viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7" />
+        </svg></a>
+    </div>
+  </div>
+
+  <div class="browse-band">
+    <div class="browse-band-glow"></div>
+    <div class="browse-band-inner">
+      <div class="browse-band-text">
+        <div class="lbl">COMPONENT LIBRARY</div>
+        <h2>26 TEMPLATES<br>ACROSS 8<br>CATEGORIES</h2>
+        <p>Navbars, heroes, footers, modals, tables, galleries, pricing, and sidebars. Filter by style, copy the code,
+          ship faster.</p>
+      </div>
+      <div class="browse-band-side">
+        <div class="cat-pills">
+          <a href="components.html#navbars" class="cat-pill"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2">
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="12" x2="21" y2="12" />
+            </svg>Navbars</a>
+          <a href="components.html#heroes" class="cat-pill"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="2" />
+            </svg>Heroes</a>
+          <a href="components.html#footers" class="cat-pill"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2">
+              <line x1="3" y1="20" x2="21" y2="20" />
+            </svg>Footers</a>
+          <a href="components.html#modals" class="cat-pill"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2">
+              <rect x="3" y="5" width="18" height="14" rx="2" />
+            </svg>Modals</a>
+          <a href="components.html#tables" class="cat-pill"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2">
+              <path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18" />
+            </svg>Tables</a>
+          <a href="components.html#galleries" class="cat-pill"><svg width="12" height="12" viewBox="0 0 24 24"
+              fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="7" height="7" />
+              <rect x="14" y="3" width="7" height="7" />
+            </svg>Galleries</a>
+          <a href="components.html#pricing" class="cat-pill"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2">
+              <line x1="12" y1="1" x2="12" y2="23" />
+            </svg>Pricing</a>
+          <a href="components.html#sidebars" class="cat-pill"><svg width="12" height="12" viewBox="0 0 24 24"
+              fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="2" />
+              <path d="M9 3v18" />
+            </svg>Sidebars</a>
+        </div>
+        <a href="components.html" class="browse-big-btn">
+          Browse All Components
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="how-section" id="how">
+    <p class="section-label">HOW IT WORKS</p>
+    <div class="section-header">
+      <h2 class="section-title">Three steps<br>to ship.</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-title">Pick a template</div>
+        <div class="step-desc">Browse the library, filter by category or theme, and preview any component in the
+          full-screen viewer.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-title">Copy the code</div>
+        <div class="step-desc">Click Copy — HTML, CSS, and JS are split into clean tabs. Grab what you need, leave what
+          you don't.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-title">Paste and ship</div>
+        <div class="step-desc">Drop it into your project. No npm, no build step, no account required.</div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="footer-logo-desc"><a href="index.html" class="logo">Templix<span>.</span></a>
+        <p>Free HTML &amp; CSS templates for modern web projects. No strings attached.</p>
+      </div>
+      <div class="footer-col">
+        <h4>COMPONENTS</h4><a href="components.html#navbars">Navbars</a><a href="components.html#heroes">Heroes</a><a
+          href="components.html#footers">Footers</a><a href="components.html#modals">Modals</a>
+      </div>
+      <div class="footer-col">
+        <h4>MORE</h4><a href="components.html#tables">Tables</a><a href="components.html#galleries">Galleries</a><a
+          href="components.html#pricing">Pricing</a><a href="components.html#sidebars">Sidebars</a>
+      </div>
+      <div class="footer-col">
+        <h4>PROJECT</h4><a href="https://github.com/muaves/templix" target="_blank">GitHub</a><a
+          href="https://templix.muaves.com">Website</a><a href="components.html">All Templates</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">2026 Muaves MIT License.</span>
+      <span class="footer-made">made with care by <a href="https://muaves.com" target="_blank">muaves</a></span>
+    </div>
+  </footer>
+
+  <script src="assets/templates.js"></script>
+  <script>
+    var mainNav = document.getElementById('mainNav');
+    window.addEventListener('scroll', function () { mainNav.classList.toggle('scrolled', window.scrollY > 50); }, { passive: true });
+
+    var dropTrigger = document.getElementById('dropTrigger');
+    var dropMenu = document.getElementById('dropMenu');
+    var dropWrap = document.getElementById('dropWrap');
+    dropTrigger.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var open = dropMenu.classList.toggle('open');
+      dropTrigger.classList.toggle('open', open);
+    });
+    document.addEventListener('click', function (e) {
+      if (!dropWrap.contains(e.target)) { dropMenu.classList.remove('open'); dropTrigger.classList.remove('open'); }
+    });
+
+    var overlay = document.getElementById('searchOverlay');
+    var input = document.getElementById('searchInput');
+    var results = document.getElementById('searchResults');
+    function openSearch() { overlay.classList.add('open'); document.body.style.overflow = 'hidden'; setTimeout(function () { input.focus(); }, 80); renderSugg(); }
+    function closeSearch() { overlay.classList.remove('open'); document.body.style.overflow = ''; input.value = ''; }
+    document.getElementById('searchOpen').addEventListener('click', openSearch);
+    document.getElementById('searchClose').addEventListener('click', closeSearch);
+    overlay.addEventListener('click', function (e) { if (e.target === overlay) closeSearch(); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeSearch();
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); openSearch(); }
+    });
+    var CHIPS = ['Navbar', 'Hero', 'Footer', 'Modal', 'Pricing', 'Gallery', 'Dark', 'Light'];
+    function renderSugg() {
+      results.innerHTML = '<div class="s-suggestions"><div class="s-sugg-label">POPULAR SEARCHES</div><div class="s-chips">' + CHIPS.map(function (s) { return '<span class="chip">' + s + '</span>'; }).join('') + '</div></div>';
+      results.querySelectorAll('.chip').forEach(function (c) {
+        c.addEventListener('click', function () { input.value = c.textContent.toLowerCase(); input.dispatchEvent(new Event('input')); input.focus(); });
+      });
+    }
+    function esc(s) { return s.replace(/[&<>"']/g, function (m) { return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]); }); }
+    input.addEventListener('input', function () {
+      var q = input.value.trim().toLowerCase();
+      if (!q) { renderSugg(); return; }
+      var all = []; Object.keys(REGISTRY).forEach(function (cat) { REGISTRY[cat].forEach(function (t) { all.push({ name: t.name, cat: cat, tags: t.tags, id: t.id }); }); });
+      var hits = all.filter(function (c) { return c.name.toLowerCase().includes(q) || c.cat.toLowerCase().includes(q) || c.tags.some(function (t) { return t.includes(q); }); });
+      if (!hits.length) { results.innerHTML = '<div class="s-empty">No results for &ldquo;<strong style="color:var(--text)">' + esc(q) + '</strong>&rdquo;</div>'; return; }
+      results.innerHTML = hits.map(function (c) { return '<div class="s-result" onclick="window.location=\'viewer.html?id=' + c.id + '\'"><div class="s-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></div><div><div class="s-name">' + esc(c.name) + '</div><div class="s-cat">' + c.cat.toUpperCase() + '</div></div><div class="s-badge">view</div></div>'; }).join('');
+    });
+
+    var FEATURED = [
+      { id: 'nav-glass', cat: 'NAVBARS', name: 'Glassmorphic Navbar', prev: 'preview-glass', tags: ['dark', 'glass'], mock: true },
+      { id: 'nav-minimal', cat: 'NAVBARS', name: 'Minimal Dark Navbar', prev: 'preview-smoke', tags: ['dark', 'minimal'], mock: true },
+      { id: 'hero-smoke', cat: 'HEROES', name: 'Smoke Effect Hero', prev: 'preview-smoke', tags: ['dark', 'cinematic'], mock: false },
+      { id: 'hero-split', cat: 'HEROES', name: 'Split Screen Hero', prev: 'preview-split', tags: ['colorful', 'split'], mock: true },
+      { id: 'hero-minimal', cat: 'HEROES', name: 'Minimal Centered Hero', prev: 'preview-light', tags: ['light', 'minimal'], mock: true, light: true },
+      { id: 'footer-nl', cat: 'FOOTERS', name: 'Newsletter Footer', prev: 'preview-mega', tags: ['dark', 'newsletter'], mock: true },
+    ];
+    function findTpl(id) { var cats = Object.keys(REGISTRY); for (var i = 0; i < cats.length; i++) { var list = REGISTRY[cats[i]]; for (var j = 0; j < list.length; j++) { if (list[j].id === id) return list[j]; } } return null; }
+    var grid = document.getElementById('featGrid');
+    var ghtml = '';
+    FEATURED.forEach(function (f) {
+      var tpl = findTpl(f.id);
+      var tagHtml = f.tags.map(function (t) { return '<span class="tag">' + t + '</span>'; }).join('');
+      var mockHtml = '';
+      if (f.mock) {
+        var mc = f.light ? 'mock mock-light' : 'mock';
+        mockHtml = '<div class="' + mc + '"><div class="mock-bar"><div class="mock-dot"></div><div class="mock-dot"></div><div class="mock-dot"></div></div><div class="mock-body"><div class="mock-line" style="width:80%"></div><div class="mock-line" style="width:60%"></div><div class="mock-btn"></div></div></div>';
+      } else {
+        mockHtml = '<div class="smoke-particles"></div>';
+      }
+      ghtml += '<div class="card" onclick="window.location=\'viewer.html?id=' + f.id + '\'">';
+      ghtml += '<div class="card-preview ' + f.prev + '">' + mockHtml + '<div class="card-overlay-hover"><button class="ov-btn" onclick="event.stopPropagation();window.location=\'viewer.html?id=' + f.id + '\'"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>Preview</button><button class="ov-btn ghost" onclick="event.stopPropagation();quickCopy(\'' + f.id + '\',this)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copy</button></div></div>';
+      ghtml += '<div class="card-info"><div class="card-meta"><span class="card-category">' + f.cat + '</span></div><div class="card-name">' + f.name + '</div><div class="card-tags">' + tagHtml + '</div></div></div>';
+    });
+    grid.innerHTML = ghtml;
+
+    function quickCopy(id, btn) {
+      var tpl = findTpl(id);
+      if (!tpl) return;
+      fetch(tpl.file).then(function (r) { return r.text(); }).then(function (src) {
+        navigator.clipboard.writeText(src).then(function () {
+          var orig = btn.innerHTML;
+          btn.classList.add('copied');
+          btn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Copied!';
+          setTimeout(function () { btn.classList.remove('copied'); btn.innerHTML = orig; }, 1800);
+        });
+      });
+    }
+  </script>
+</body>
+
+</html>
