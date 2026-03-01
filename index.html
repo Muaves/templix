@@ -48,7 +48,25 @@
       font-family: 'DM Sans', sans-serif;
       overflow-x: hidden
     }
+    body {
+      --sb-track-color: #222323;
+      --sb-thumb-color: #e04c25;
+      --sb-size: 10px;
+    }
 
+    body::-webkit-scrollbar {
+      width: var(--sb-size);
+    }
+
+    body::-webkit-scrollbar-track {
+      background: var(--sb-track-color);
+      border-radius: 21px;
+    }
+
+    body::-webkit-scrollbar-thumb {
+      background: var(--sb-thumb-color);
+      border-radius: 21px;
+    }    
     nav {
       position: fixed;
       top: 0;
