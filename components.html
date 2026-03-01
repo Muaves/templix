@@ -672,7 +672,7 @@
     };
 
     function buildCatList() {
-      var html = '<button class="cat-btn active" data-cat="all"><span class="cat-btn-inner"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>All</span><span class="cat-count">26</span></button>';
+      var html = '<button class="cat-btn active" data-cat="all"><span class="cat-btn-inner"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>All</span><span class="cat-count">27</span></button>';
       Object.keys(CATS).forEach(function (k) {
         html += '<button class="cat-btn" data-cat="' + k + '"><span class="cat-btn-inner">' + CAT_ICONS[k] + (CATS[k]) + '</span><span class="cat-count">' + REGISTRY[k].length + '</span></button>';
       });
