@@ -6,6 +6,7 @@ const REGISTRY = {
     { id:"nav-light",     name:"Clean Light",     file:"navbars/light.html",        tags:["light","minimal"] },
     { id:"nav-neon",      name:"Neon",            file:"navbars/neon.html",         tags:["dark","neon"]     },
     { id:"nav-retro",     name:"Retro",           file:"navbars/retro.html",        tags:["retro","dark"]    },
+    { id:"nav-interactive",     name:"Interactive",           file:"navbars/interactive.html",        tags:["interactive","dark"]    },
   ],
   heroes: [
     { id:"hero-smoke",    name:"Smoke Effect",    file:"heroes/smoke.html",    tags:["dark","cinematic"] },
