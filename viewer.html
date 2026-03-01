@@ -275,7 +275,8 @@
     .code-inner {
       display: flex;
       padding: 1.1rem 1.2rem;
-      min-width: max-content
+      min-width: max-content;
+      align-items: flex-start;
     }
 
     .line-nums {
@@ -287,16 +288,19 @@
       padding-right: 1.2rem;
       user-select: none;
       flex-shrink: 0;
-      min-width: 2.5rem
+      min-width: 3.5rem; 
+      white-space: pre; 
     }
 
     .code-text {
       font-family: 'Space Mono', monospace;
       font-size: .74rem;
       line-height: 1.75;
-      white-space: pre;
-      color: #abb2bf
+      white-space: pre; 
+      color: #abb2bf;
+      flex: 1; 
     }
+    
 
     .ht {
       color: #e06c75
