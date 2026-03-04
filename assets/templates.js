@@ -7,6 +7,7 @@ const REGISTRY = {
     { id:"nav-neon",        name:"Neon",            file:"navbars/neon.html",         tags:["dark","neon"],        desc:"Glowing neon accents with a cyberpunk feel. High contrast and eye-catching." },
     { id:"nav-retro",       name:"Retro",           file:"navbars/retro.html",        tags:["retro","dark"],       desc:"Pixel-inspired retro style with monospace type. Great for dev tools and portfolios." },
     { id:"nav-interactive", name:"Interactive",     file:"navbars/interactive.html",  tags:["interactive","dark"], desc:"Dropdown menus, hover states, and smooth transitions. Feature-complete and ready to customise." },
+    { id:"nav-flip",        name:"Flip",            file:"navbars/flip.html",         tags:["dark","flip","3d"],   desc:"3d rotating hover animation with very simple but attention-grabbing navigationbar!" },
   ],
   heroes: [
     { id:"hero-smoke",    name:"Smoke Effect",  file:"heroes/smoke.html",    tags:["dark","cinematic"], desc:"Animated smoke particle background. Moody and cinematic — perfect for creative agencies." },
